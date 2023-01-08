@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.Business.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.DAL.Tests", "Tests\LibLite.Inventero.DAL.Tests\LibLite.Inventero.DAL.Tests.csproj", "{77179A19-3F72-4070-B167-8A27F0CDA4E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.Presentation.Desktop.Tests", "Tests\LibLite.Inventero.Presentation.Desktop.Tests\LibLite.Inventero.Presentation.Desktop.Tests.csproj", "{97E8F5A5-8059-4F7A-8284-82814F47B1EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{77179A19-3F72-4070-B167-8A27F0CDA4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77179A19-3F72-4070-B167-8A27F0CDA4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77179A19-3F72-4070-B167-8A27F0CDA4E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97E8F5A5-8059-4F7A-8284-82814F47B1EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97E8F5A5-8059-4F7A-8284-82814F47B1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97E8F5A5-8059-4F7A-8284-82814F47B1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97E8F5A5-8059-4F7A-8284-82814F47B1EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{C6A7D44D-F0F9-44A3-AA75-5FFECF04DD1A} = {9E5915C5-0DBB-415A-8457-D45C4317513F}
 		{48592C24-C76F-4274-8767-E4778270F893} = {F738C9A8-3413-40C7-981B-CDC1457DD1DE}
 		{77179A19-3F72-4070-B167-8A27F0CDA4E2} = {F738C9A8-3413-40C7-981B-CDC1457DD1DE}
+		{97E8F5A5-8059-4F7A-8284-82814F47B1EE} = {F738C9A8-3413-40C7-981B-CDC1457DD1DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E2DAD482-A40A-483C-BD9B-B44D88B24712}
