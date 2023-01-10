@@ -7,21 +7,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{9E5915
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F738C9A8-3413-40C7-981B-CDC1457DD1DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.Core", "Source\LibLite.Inventero.Core\LibLite.Inventero.Core.csproj", "{E3A5C37C-8FE6-4E61-8E98-A1A4948F3062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLite.Inventero.Core", "Source\LibLite.Inventero.Core\LibLite.Inventero.Core.csproj", "{E3A5C37C-8FE6-4E61-8E98-A1A4948F3062}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.Business", "Source\LibLite.Inventero.Business\LibLite.Inventero.Business.csproj", "{0FE959A5-AED0-4D60-B762-4A9BF527E1BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLite.Inventero.Business", "Source\LibLite.Inventero.Business\LibLite.Inventero.Business.csproj", "{0FE959A5-AED0-4D60-B762-4A9BF527E1BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.Service", "Source\LibLite.Inventero.Service\LibLite.Inventero.Service.csproj", "{02904F08-0D42-4774-A362-E873BB183F69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLite.Inventero.Adapter", "Source\LibLite.Inventero.Adapter\LibLite.Inventero.Adapter.csproj", "{02904F08-0D42-4774-A362-E873BB183F69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.DAL", "Source\LibLite.Inventero.DAL\LibLite.Inventero.DAL.csproj", "{94AB4754-0C58-4D02-AB1F-AEE0150A30F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLite.Inventero.DAL", "Source\LibLite.Inventero.DAL\LibLite.Inventero.DAL.csproj", "{94AB4754-0C58-4D02-AB1F-AEE0150A30F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.Presentation.Desktop", "Source\LibLite.Inventero.Presentation.Desktop\LibLite.Inventero.Presentation.Desktop.csproj", "{C6A7D44D-F0F9-44A3-AA75-5FFECF04DD1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLite.Inventero.Presentation.Desktop", "Source\LibLite.Inventero.Presentation.Desktop\LibLite.Inventero.Presentation.Desktop.csproj", "{C6A7D44D-F0F9-44A3-AA75-5FFECF04DD1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.Business.Tests", "Tests\LibLite.Inventero.Business.Tests\LibLite.Inventero.Business.Tests.csproj", "{48592C24-C76F-4274-8767-E4778270F893}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLite.Inventero.Business.Tests", "Tests\LibLite.Inventero.Business.Tests\LibLite.Inventero.Business.Tests.csproj", "{48592C24-C76F-4274-8767-E4778270F893}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.DAL.Tests", "Tests\LibLite.Inventero.DAL.Tests\LibLite.Inventero.DAL.Tests.csproj", "{77179A19-3F72-4070-B167-8A27F0CDA4E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLite.Inventero.DAL.Tests", "Tests\LibLite.Inventero.DAL.Tests\LibLite.Inventero.DAL.Tests.csproj", "{77179A19-3F72-4070-B167-8A27F0CDA4E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibLite.Inventero.Presentation.Desktop.Tests", "Tests\LibLite.Inventero.Presentation.Desktop.Tests\LibLite.Inventero.Presentation.Desktop.Tests.csproj", "{97E8F5A5-8059-4F7A-8284-82814F47B1EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibLite.Inventero.Presentation.Desktop.Tests", "Tests\LibLite.Inventero.Presentation.Desktop.Tests\LibLite.Inventero.Presentation.Desktop.Tests.csproj", "{97E8F5A5-8059-4F7A-8284-82814F47B1EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
