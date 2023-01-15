@@ -2,7 +2,7 @@
 using LibLite.Inventero.Core.Models.Tools;
 using System.Text;
 
-namespace LibLite.Inventero.Service.Tools
+namespace LibLite.Inventero.Adapter.Tools
 {
     public class FileSystem : IFileSystem
     {

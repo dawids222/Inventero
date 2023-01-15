@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+﻿using LibLite.Inventero.DAL.Extensions;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LibLite.Inventero.DAL.Converters
 {
@@ -6,8 +7,8 @@ namespace LibLite.Inventero.DAL.Converters
     {
         public NullableDateTimeUtcConverter() : this(null) { }
         public NullableDateTimeUtcConverter(ConverterMappingHints hints) : base(
-            datetime => datetime != null ? datetime.Value.ToUniversalTime() : null,
-            datetime => datetime != null ? datetime.Value.ToUniversalTime() : null,
+            datetime => datetime != null ? datetime.Value.ToUtc() : null,
+            datetime => datetime != null ? datetime.Value.ToUtc() : null,
             hints)
         { }
     }

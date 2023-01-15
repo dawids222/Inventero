@@ -1,8 +1,8 @@
-﻿using LibLite.Inventero.Core.Contracts.Tools;
-using LibLite.Inventero.Service.Converters;
+﻿using LibLite.Inventero.Adapter.Converters;
+using LibLite.Inventero.Core.Contracts.Tools;
 using System.Text.Json;
 
-namespace LibLite.Inventero.Service.Tools
+namespace LibLite.Inventero.Adapter.Tools
 {
     public class SystemTextJsonSerializer : ISerializer
     {

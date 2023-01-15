@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LibLite.Inventero.Adapter\LibLite.Inventero.Adapter.csproj" />
     <ProjectReference Include="..\LibLite.Inventero.DAL\LibLite.Inventero.DAL.csproj" />
   </ItemGroup>
 

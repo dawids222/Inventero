@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace LibLite.Inventero.Service.Converters
+namespace LibLite.Inventero.Adapter.Converters
 {
     internal class CultureSpecificQuotedDecimalConverter : JsonConverter<double>
     {

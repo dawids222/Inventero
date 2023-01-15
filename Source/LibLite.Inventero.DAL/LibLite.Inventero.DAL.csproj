@@ -12,7 +12,10 @@
 
   <ItemGroup>
     <Folder Include="Migrations\SQLite\" />
-    <Folder Include="Stores\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibLite.Inventero.Core\LibLite.Inventero.Core.csproj" />
   </ItemGroup>
 
 </Project>

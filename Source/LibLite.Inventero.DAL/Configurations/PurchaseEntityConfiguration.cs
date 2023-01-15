@@ -23,6 +23,9 @@ namespace LibLite.Inventero.DAL.Configurations
             builder
                 .HasOne(x => x.Product)
                 .WithMany();
+            builder
+                .Navigation(x => x.Product)
+                .AutoInclude();
         }
     }
 }
