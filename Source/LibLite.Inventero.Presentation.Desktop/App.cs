@@ -1,4 +1,8 @@
-﻿using LibLite.Inventero.DAL;
+﻿using LibLite.Inventero.Adapter.Tools;
+using LibLite.Inventero.Core.Contracts.Stores;
+using LibLite.Inventero.Core.Contracts.Tools;
+using LibLite.Inventero.DAL;
+using LibLite.Inventero.DAL.Stores;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +13,9 @@ namespace LibLite.Inventero.Presentation.Desktop
 {
     public sealed partial class App : Application
     {
+        public IServiceProvider Services { get; }
+        public new static App Current => (App)Application.Current;
+
         public App()
         {
             Services = RegisterServices();
@@ -17,19 +24,6 @@ namespace LibLite.Inventero.Presentation.Desktop
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Gets the current <see cref="App"/> instance in use
-        /// </summary>
-        public new static App Current => (App)Application.Current;
-
-        /// <summary>
-        /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
-        /// </summary>
-        public IServiceProvider Services { get; }
-
-        /// <summary>
-        /// Registers the services for the application.
-        /// </summary>
         private static IServiceProvider RegisterServices()
         {
             var services = new ServiceCollection();
@@ -39,9 +33,18 @@ namespace LibLite.Inventero.Presentation.Desktop
                 opt.UseSqlite("Data Source=inventero.db");
             });
 
+            services.AddSingleton<IPurchaseStore, PurchaseStore>();
+            services.AddSingleton<IProductStore, ProductStore>();
+            services.AddSingleton<IGroupStore, GroupStore>();
+
+            services.AddSingleton<IMapper, Adapter.Tools.MapsterMapper>();
+            services.AddSingleton<IEventBus, BusLiteEventBus>();
+
             services.AddSingleton<MainWindowViewModel>();
-            services.AddSingleton<Test1ViewModel>();
-            services.AddSingleton<Test2ViewModel>();
+            services.AddSingleton<MainMenuViewModel>();
+            services.AddSingleton<PurchasesViewModel>();
+            services.AddSingleton<ProductsViewModel>();
+            services.AddSingleton<GroupsViewModel>();
 
             return services.BuildServiceProvider();
         }

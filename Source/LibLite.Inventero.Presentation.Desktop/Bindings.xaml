@@ -2,10 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:LibLite.Inventero.Presentation.Desktop.ViewModel"
                     xmlns:view="clr-namespace:LibLite.Inventero.Presentation.Desktop.View">
-    <DataTemplate DataType="{x:Type vm:Test1ViewModel}">
-        <view:Test1 DataContext="{Binding}"/>
+    <DataTemplate DataType="{x:Type vm:MainMenuViewModel}">
+        <view:MainMenu DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:Test2ViewModel}">
-        <view:Test2 DataContext="{Binding}"/>
+    <DataTemplate DataType="{x:Type vm:PurchasesViewModel}">
+        <view:PurchasesView DataContext="{Binding}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ProductsViewModel}">
+        <view:ProductsView DataContext="{Binding}"/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:GroupsViewModel}">
+        <view:GroupsView DataContext="{Binding}"/>
     </DataTemplate>
 </ResourceDictionary>

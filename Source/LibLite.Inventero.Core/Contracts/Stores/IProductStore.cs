@@ -2,5 +2,5 @@
 
 namespace LibLite.Inventero.Core.Contracts.Stores
 {
-    public interface IproductStore : IStore<Product> { }
+    public interface IProductStore : IStore<Product> { }
 }

@@ -5,7 +5,7 @@ using LibLite.Inventero.DAL.Entities;
 
 namespace LibLite.Inventero.DAL.Stores
 {
-    public class ProductStore : Store<Product, ProductEntity>, IproductStore
+    public class ProductStore : Store<Product, ProductEntity>, IProductStore
     {
         public ProductStore(InventeroDbContext context, IMapper mapper)
             : base(context, mapper) { }

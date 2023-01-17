@@ -1,43 +1,55 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Linq;
+using LibLite.Inventero.Core.Contracts.Tools;
+using LibLite.Inventero.Presentation.Desktop.Enums;
+using LibLite.Inventero.Presentation.Desktop.Models.Events;
+using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
     public partial class MainWindowViewModel : ObservableObject
     {
-        private readonly Test1ViewModel _test1ViewModel;
-        private readonly Test2ViewModel _test2ViewModel;
+        private readonly IEventBus _eventBus;
+
+        private readonly MainMenuViewModel _mainMenuViewModel;
+        private readonly PurchasesViewModel _purchasesViewModel;
+        private readonly ProductsViewModel _productsViewModel;
+        private readonly GroupsViewModel _groupsViewModel;
 
         [ObservableProperty]
-        private ObservableObject? _view;
-
+        private ObservableObject _menuViewModel;
         [ObservableProperty]
-        private string _name = "Ania";
+        private ObservableObject _mainViewModel;
 
         public MainWindowViewModel(
-            Test1ViewModel test1ViewModel,
-            Test2ViewModel test2ViewModel)
+            IEventBus eventBus,
+            MainMenuViewModel mainMenuViewModel,
+            PurchasesViewModel purchasesViewModel,
+            ProductsViewModel productsViewModel,
+            GroupsViewModel groupsViewModel)
         {
-            _test1ViewModel = test1ViewModel;
-            _test2ViewModel = test2ViewModel;
+            _eventBus = eventBus;
 
-            View = _test1ViewModel;
+            _mainMenuViewModel = mainMenuViewModel;
+            _purchasesViewModel = purchasesViewModel;
+            _productsViewModel = productsViewModel;
+            _groupsViewModel = groupsViewModel;
+
+            MenuViewModel = _mainMenuViewModel;
+            MainViewModel = _purchasesViewModel;
+
+            _eventBus.Subscribe<ChangeMainViewEvent>(ChangeMainView);
         }
 
-        [RelayCommand]
-        private void ChangeName()
+        private void ChangeMainView(ChangeMainViewEvent @event)
         {
-            Name = string.Join("", _name.Reverse());
-        }
-
-        [RelayCommand]
-        private void ChangeView()
-        {
-            if (View is Test1ViewModel)
-                View = _test2ViewModel;
-            else
-                View = _test1ViewModel;
+            Dictionary<MainView, ObservableObject> mainViews = new()
+            {
+                { MainView.Purchases, _purchasesViewModel},
+                { MainView.Products, _productsViewModel},
+                { MainView.Groups, _groupsViewModel},
+            };
+            var viewModel = mainViews[@event.View];
+            MainViewModel = viewModel;
         }
     }
 }

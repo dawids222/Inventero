@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace LibLite.Inventero.Presentation.Desktop.View
 {
     /// <summary>
-    /// Interaction logic for Test2.xaml
+    /// Interaction logic for ProductsView.xaml
     /// </summary>
-    public partial class Test2 : UserControl
+    public partial class ProductsView : UserControl
     {
-        public Test2()
+        public ProductsView()
         {
             InitializeComponent();
         }
