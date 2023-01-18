@@ -44,7 +44,8 @@ namespace LibLite.Inventero.DAL.Stores
         {
             var query = _context
                 .Set<TEntity>()
-                .AsQueryable();
+                .AsQueryable()
+                .SearchBy(request.Search);
             var count = await query.CountAsync();
             foreach (var sort in request.Sorts)
             {

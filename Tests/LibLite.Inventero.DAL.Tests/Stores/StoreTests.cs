@@ -8,6 +8,7 @@ using LibLite.Inventero.DAL.Extensions;
 using LibLite.Inventero.DAL.Stores;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using System.Reflection;
 
 namespace LibLite.Inventero.DAL.Tests.Stores
 {
@@ -196,12 +197,57 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 Property = nameof(Entity.Id),
                 Direction = SortDirection.ASC,
             } };
-            var request = new PaginatedListRequest(pageIndex, pageSize, sorts);
+            var request = new PaginatedListRequest(pageIndex, pageSize, null, sorts);
             var result = await _store.GetAsync(request);
 
             Assert.That(_comparer.Compare(expected, result).AreEqual, Is.True);
             Assert.That(result.TotalPages, Is.EqualTo(2));
             Assert.That(result.HasNextPage, Is.True);
+            Assert.That(result.HasPreviousPage, Is.False);
+            Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
+        }
+
+        [Test]
+        public async Task GetAsync_Paginated_WithSearch_ReturnsFilteredPaginatedCollectionOfObjects()
+        {
+            var searchBy = "test";
+            var pageIndex = 0;
+            var pageSize = 2;
+            var mapped = new List<TDomain> { new(), new() };
+            var expected = new PaginatedList<TDomain>(
+                items: mapped,
+                pageIndex: pageIndex,
+                pageSize: pageSize,
+                totalItems: 2);
+            var entity = CreateNewEntity();
+            var entity1 = CreateNewEntity();
+            var entity2 = CreateNewEntity();
+            var property = typeof(TEntity)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.PropertyType == typeof(string))
+                .FirstOrDefault();
+            if (property is null) { return; }
+            property.SetValue(entity1, searchBy);
+            property.SetValue(entity2, searchBy + "random");
+            property.SetValue(entity, "not interesting");
+            _context.Add(entity);
+            _context.Add(CreateNewEntity());
+            _context.Add(entity1);
+            _context.Add(entity2);
+            await _context.SaveChangesAsync();
+            _mapperMock
+                .Setup(x => x.Map<List<TDomain>>(
+                    It.Is<List<TEntity>>(x =>
+                        x.ElementAt(0).Id == entity1.Id ||
+                        x.ElementAt(1).Id == entity2.Id)))
+                .Returns(mapped);
+
+            var request = new PaginatedListRequest(pageIndex, pageSize, searchBy, Array.Empty<Sort>());
+            var result = await _store.GetAsync(request);
+
+            Assert.That(_comparer.Compare(expected, result).AreEqual, Is.True);
+            Assert.That(result.TotalPages, Is.EqualTo(1));
+            Assert.That(result.HasNextPage, Is.False);
             Assert.That(result.HasPreviousPage, Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
