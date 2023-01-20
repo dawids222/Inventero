@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:LibLite.Inventero.Presentation.Desktop.View"
              xmlns:rs="clr-namespace:LibLite.Inventero.Presentation.Desktop.Resources"
              mc:Ignorable="d" 
@@ -19,7 +21,14 @@
                     HorizontalAlignment="Right">
             <Label Content="Szukaj"/>
             <TextBox Width="180"
-                     Style="{StaticResource MahApps.Styles.TextBox.Search}"/>
+                     Style="{StaticResource MahApps.Styles.TextBox.Search}"
+                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged }">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding LoadItemsCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </StackPanel>
         <DataGrid Grid.Row="2"
                   Margin="0 6"
@@ -71,11 +80,21 @@
             <ComboBox Height="{Binding Path=Height, ElementName=PrevBtn}"
                       Width="48"
                       BorderThickness="{Binding Path=BorderThickness, ElementName=PrevBtn}"
-                     BorderBrush="{Binding Path=BorderBrush, ElementName=PrevBtn}">
-                <ComboBoxItem Content="5"/>
-                <ComboBoxItem Content="10"/>
-                <ComboBoxItem Content="20" IsSelected="True"/>
-                <ComboBoxItem Content="50"/>
+                      BorderBrush="{Binding Path=BorderBrush, ElementName=PrevBtn}"
+                      SelectedItem="{Binding PageSize}">
+                <ComboBox.ItemsSource>
+                    <x:Array Type="{x:Type sys:Int32}">
+                        <sys:Int32>5</sys:Int32>
+                        <sys:Int32>10</sys:Int32>
+                        <sys:Int32>20</sys:Int32>
+                        <sys:Int32>50</sys:Int32>
+                    </x:Array>
+                </ComboBox.ItemsSource>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding LoadItemsCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ComboBox >
             <Separator Width="16" Visibility="Hidden"/>
             <Button x:Name="PrevBtn" 
@@ -86,14 +105,22 @@
                     BorderThickness="1"
                     BorderBrush="{StaticResource MahApps.Brushes.Border.NonActive}"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
-            <TextBox Text="1" 
-                     Height="{Binding Path=Height, ElementName=PrevBtn}"
+                    HorizontalAlignment="Center"
+                    Command="{Binding DecrementPageCommand}"/>
+            <TextBox Height="{Binding Path=Height, ElementName=PrevBtn}"
                      Width="{Binding Path=Width, ElementName=PrevBtn}"
                      BorderThickness="{Binding Path=BorderThickness, ElementName=PrevBtn}"
                      BorderBrush="{Binding Path=BorderBrush, ElementName=PrevBtn}"
                      VerticalAlignment="Center" 
-                     HorizontalAlignment="Center"/>
+                     HorizontalAlignment="Center"
+                     IsEnabled="False"
+                     Text="{Binding PageNumber}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding LoadItemsCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
             <Button Content="->"
                     Style="{DynamicResource MahApps.Styles.Button.Square}"
                     Height="{Binding Path=Height, ElementName=PrevBtn}"
@@ -101,7 +128,8 @@
                     BorderThickness="{Binding Path=BorderThickness, ElementName=PrevBtn}"
                     BorderBrush="{Binding Path=BorderBrush, ElementName=PrevBtn}"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Center"/>
+                    HorizontalAlignment="Center"
+                    Command="{Binding IncrementPageCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

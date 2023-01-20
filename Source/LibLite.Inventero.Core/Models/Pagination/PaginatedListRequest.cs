@@ -2,10 +2,10 @@
 {
     public class PaginatedListRequest
     {
-        public int PageIndex { get; }
-        public int PageSize { get; }
-        public string Search { get; set; }
-        public IEnumerable<Sort> Sorts { get; }
+        public int PageIndex { get; init; }
+        public int PageSize { get; init; }
+        public string Search { get; init; }
+        public IEnumerable<Sort> Sorts { get; init; }
 
         public PaginatedListRequest(int pageIndex, int pageSize, string search, IEnumerable<Sort> sorts)
         {
@@ -14,6 +14,9 @@
             Search = search;
             Sorts = sorts;
         }
+
+        public PaginatedListRequest(PaginatedListRequest original)
+            : this(original.PageIndex, original.PageSize, original.Search, original.Sorts) { }
 
         public PaginatedListRequest(int pageIndex, int pageSize, IEnumerable<Sort> sorts)
             : this(pageIndex, pageSize, string.Empty, sorts) { }
