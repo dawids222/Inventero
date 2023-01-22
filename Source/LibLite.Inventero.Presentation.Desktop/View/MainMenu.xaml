@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:LibLite.Inventero.Presentation.Desktop.View"
              xmlns:vm="clr-namespace:LibLite.Inventero.Presentation.Desktop.ViewModel"
              xmlns:rs ="clr-namespace:LibLite.Inventero.Presentation.Desktop.Resources"
@@ -22,7 +23,10 @@
                          Command="{Binding ShowPurchasesViewCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Separator Width="12" Background="Transparent"/>
-                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE790;" />
+                    <icons:PackIconFontAwesome x:Name="PurchaseIcon"
+                                               Kind="ShoppingCartSolid"
+                                               Height="24"
+                                               Width="24"/>
                     <TextBlock Text="{x:Static rs:Strings.PurchasesMenuLabel}" Style="{StaticResource MenuButtonText}"/>
                 </StackPanel>
             </RadioButton>
@@ -31,7 +35,9 @@
                          Command="{Binding ShowProductsViewCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Separator Width="12" Background="Transparent"/>
-                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE790;"/>
+                    <icons:PackIconFontAwesome Kind="CubesSolid"
+                                               Height="{Binding Path=Height, ElementName=PurchaseIcon}"
+                                               Width="{Binding Path=Width, ElementName=PurchaseIcon}"/>
                     <TextBlock Text="{x:Static rs:Strings.ProductsManuLabel}" Style="{StaticResource MenuButtonText}"/>
                 </StackPanel>
             </RadioButton>
@@ -40,7 +46,9 @@
                          Command="{Binding ShowGroupsViewCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Separator Width="12" Background="Transparent"/>
-                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE790;" />
+                    <icons:PackIconFontAwesome Kind="LayerGroupSolid"
+                                               Height="{Binding Path=Height, ElementName=PurchaseIcon}"
+                                               Width="{Binding Path=Width, ElementName=PurchaseIcon}"/>
                     <TextBlock Text="{x:Static rs:Strings.GroupsMenuLabel}" Style="{StaticResource MenuButtonText}"/>
                 </StackPanel>
             </RadioButton>
@@ -51,7 +59,9 @@
                          Command="{Binding ShowInventoryViewCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Separator Width="12" Background="Transparent"/>
-                    <mah:FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE790;" />
+                    <icons:PackIconFontAwesome Kind="ClipboardListSolid"
+                                               Height="{Binding Path=Height, ElementName=PurchaseIcon}"
+                                               Width="{Binding Path=Width, ElementName=PurchaseIcon}"/>
                     <TextBlock Text="{x:Static rs:Strings.InventoryMenuLabel}" Style="{StaticResource MenuButtonText}"/>
                 </StackPanel>
             </RadioButton>
