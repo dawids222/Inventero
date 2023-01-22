@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
+using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -15,6 +16,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         where TStore : IStore<TItem>
     {
         private readonly TStore _store;
+        private readonly IDialogService _dialogService;
 
         [ObservableProperty]
         private int _pageNumber = 1;
@@ -27,9 +29,10 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         [ObservableProperty]
         private List<Column> _columns;
 
-        protected PaginatedListViewModel(TStore store)
+        protected PaginatedListViewModel(TStore store, IDialogService dialogService)
         {
             _store = store;
+            _dialogService = dialogService;
             Initialize();
         }
 
@@ -50,8 +53,10 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         [RelayCommand]
         private async void LoadItems()
         {
+            await _dialogService.ShowLoadingAsync();
             var request = CreateItemsRequest();
             Items = await _store.GetAsync(request);
+            await _dialogService.HideLoadingAsync();
         }
 
         [RelayCommand]

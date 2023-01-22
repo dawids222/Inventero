@@ -3,7 +3,10 @@ using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Contracts.Tools;
 using LibLite.Inventero.DAL;
 using LibLite.Inventero.DAL.Stores;
+using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using LibLite.Inventero.Presentation.Desktop.Services;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
+using MahApps.Metro.Controls.Dialogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -40,8 +43,13 @@ namespace LibLite.Inventero.Presentation.Desktop
             services.AddSingleton<IMapper, Adapter.Tools.MapsterMapper>();
             services.AddSingleton<IEventBus, BusLiteEventBus>();
 
+            services.AddSingleton<IDialogCoordinator, DialogCoordinator>();
+            services.AddSingleton<IDialogService, DialogService>();
+            services.AddSingleton<IViewModelService>(provider => new ViewModelService(provider));
+
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<MainMenuViewModel>();
+
             services.AddSingleton<PurchasesViewModel>();
             services.AddSingleton<ProductsViewModel>();
             services.AddSingleton<GroupsViewModel>();

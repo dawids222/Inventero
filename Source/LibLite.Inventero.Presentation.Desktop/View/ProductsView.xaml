@@ -41,14 +41,15 @@
                     HorizontalAlignment="Right">
             <Label Content="Szukaj"/>
             <TextBox Width="180"
-                     Style="{StaticResource MahApps.Styles.TextBox.Search}"
-                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged }">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="TextChanged">
-                        <i:InvokeCommandAction Command="{Binding LoadItemsCommand}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>
+                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged }"/>
+            <Button Width="32"
+                    Style="{StaticResource MahApps.Styles.Button.Square}"
+                    BorderThickness="1"
+                    Command="{Binding LoadItemsCommand}">
+                <Button.Content>
+                    <icons:PackIconFontAwesome Kind="SearchSolid"/>
+                </Button.Content>
+            </Button>
         </StackPanel>
         <DataGrid x:Name="ItemsDataGrid" 
                   Grid.Row="2"

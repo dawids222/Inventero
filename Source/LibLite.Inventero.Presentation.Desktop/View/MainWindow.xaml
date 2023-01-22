@@ -12,7 +12,12 @@
     MinWidth="600"
     Height="720" 
     Width="1080"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    Dialog:DialogParticipation.Register="{Binding}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition MaxWidth="150"/>
@@ -29,6 +34,17 @@
                     Padding="25 25 25 25 "
                     Background="{StaticResource MahApps.Brushes.ThemeBackground}">
                 <ContentControl Content="{Binding MainViewModel}"/>
+            </Border>
+        </Border>
+        <Border Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Background="{StaticResource MahApps.Brushes.Gray.SemiTransparent}"
+                Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                d:Visibility="Hidden">
+            <Border VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <mah:ProgressRing Foreground="{DynamicResource AccentColorBrush}"
+                                  IsActive="True" />
             </Border>
         </Border>
     </Grid>
