@@ -5,10 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:LibLite.Inventero.Presentation.Desktop.View"
              xmlns:rs="clr-namespace:LibLite.Inventero.Presentation.Desktop.Resources"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             x:Name="PaginatedListView"
+             d:DesignHeight="450" 
+             d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>
@@ -16,6 +19,23 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
+            <Button Width="64"
+                    Height="64"
+                    Style="{DynamicResource MahApps.Styles.Button.Square}"
+                    Command="{Binding AddItemCommand}">
+                <Button.Content>
+                    <icons:PackIconFontAwesome Kind="PlusSolid"
+                                               Foreground="{StaticResource LibLite.Brushes.Add}"
+                                               Width="24"
+                                               Height="24"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1"
                     HorizontalAlignment="Right">
@@ -30,27 +50,12 @@
                 </i:Interaction.Triggers>
             </TextBox>
         </StackPanel>
-        <DataGrid Grid.Row="2"
+        <DataGrid x:Name="ItemsDataGrid" 
+                  Grid.Row="2"
                   Margin="0 6"
-                  ItemsSource="{Binding Products}"
+                  ItemsSource="{Binding Items}"
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="GroupHeader"
-                                    Header="{x:Static rs:Strings.ProductsGridGroupNameHeader}"
-                                    Binding="{Binding Group.Name}"
-                                    Width="*"
-                                    FontSize="16"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Header="{x:Static rs:Strings.ProductsGridNameHeader}"
-                                    Binding="{Binding Name}"
-                                    Width="*"
-                                    FontSize="16"
-                                    IsReadOnly="True"/>
-                <DataGridTextColumn Header="{x:Static rs:Strings.ProductsGridPriceHeader}"
-                                    Binding="{Binding Price}"
-                                    Width="*"
-                                    FontSize="16"
-                                    IsReadOnly="True"/>
                 <DataGridTemplateColumn Header="Akcje"
                                         Width="*"
                                         IsReadOnly="True">
@@ -62,12 +67,26 @@
                                 <Button x:Name="UpdateBtn" 
                                         Width="36"
                                         Height="36"
-                                        Style="{DynamicResource MahApps.Styles.Button.Circle}"/>
+                                        Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                                        Command="{Binding Path=DataContext.EditItemCommand, ElementName=PaginatedListView}"
+                                        CommandParameter="{Binding}">
+                                    <Button.Content>
+                                        <icons:PackIconFontAwesome Kind="PenSolid"
+                                                                   Foreground="{StaticResource LibLite.Brushes.Edit}"/>
+                                    </Button.Content>
+                                </Button>
                                 <Separator Width="16"
                                            Visibility="Hidden"/>
                                 <Button Width="{Binding Path=Width, ElementName=UpdateBtn}"
                                         Height="{Binding Path=Height, ElementName=UpdateBtn}"
-                                        Style="{DynamicResource MahApps.Styles.Button.Circle}"/>
+                                        Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                                        Command="{Binding Path=DataContext.DeleteItemCommand, ElementName=PaginatedListView}"
+                                        CommandParameter="{Binding}">
+                                    <Button.Content>
+                                        <icons:PackIconFontAwesome Kind="TrashSolid"
+                                                                   Foreground="{StaticResource LibLite.Brushes.Delete}"/>
+                                    </Button.Content>
+                                </Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -16,4 +16,8 @@
     <SolidColorBrush x:Key="LibLite.Brushes.Product.Primary">#E6B400</SolidColorBrush>
     <SolidColorBrush x:Key="LibLite.Brushes.Group.Primary">#E6CC00</SolidColorBrush>
     <SolidColorBrush x:Key="LibLite.Brushes.Inventory.Primary">#E5DE00</SolidColorBrush>
+
+    <SolidColorBrush x:Key="LibLite.Brushes.Add">#29a329</SolidColorBrush>
+    <SolidColorBrush x:Key="LibLite.Brushes.Edit">#ffcc00</SolidColorBrush>
+    <SolidColorBrush x:Key="LibLite.Brushes.Delete">#990000</SolidColorBrush>
 </ResourceDictionary>
