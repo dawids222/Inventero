@@ -1,28 +1,27 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using LibLite.Inventero.Core.Contracts.Stores;
+﻿using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
-using LibLite.Inventero.Core.Models.Pagination;
-using System.Threading.Tasks;
+using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using LibLite.Inventero.Presentation.Desktop.Models.Views;
+using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
-    public partial class PurchasesViewModel : ObservableObject
+    public partial class PurchasesViewModel : PaginatedListViewModel<Purchase, IPurchaseStore>
     {
-        private readonly IPurchaseStore _store;
+        public PurchasesViewModel(IPurchaseStore store, IDialogService dialogService)
+            : base(store, dialogService) { }
 
-        [ObservableProperty]
-        private PaginatedList<Purchase> _purchases;
-
-        public PurchasesViewModel(IPurchaseStore store)
+        protected override void AddItem()
         {
-            _store = store;
-
-            InitializeAsync();
+            return;
         }
 
-        private async Task InitializeAsync()
+        protected override void CreateDataGridColumns(List<Column> columns)
         {
-            Purchases = await _store.GetAsync(new PaginatedListRequest());
+            columns.Add(new Column("Produkt", $"{nameof(Purchase.Product)}.{nameof(Purchase.Product.Name)}"));
+            columns.Add(new Column("Liczba", nameof(Purchase.Amount)));
+            columns.Add(new Column("Cena Jednostkowa", nameof(Purchase.UnitPrice)));
+            columns.Add(new Column("Data Zakupu", nameof(Purchase.Date)));
         }
     }
 }

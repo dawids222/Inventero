@@ -7,11 +7,11 @@ using System.Windows.Data;
 namespace LibLite.Inventero.Presentation.Desktop.View
 {
     /// <summary>
-    /// Interaction logic for ProductsView.xaml
+    /// Interaction logic for PaginatedListView.xaml
     /// </summary>
-    public partial class ProductsView : UserControl
+    public partial class PaginatedListView : UserControl
     {
-        public ProductsView()
+        public PaginatedListView()
         {
             InitializeComponent();
 

@@ -1,28 +1,24 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using LibLite.Inventero.Core.Contracts.Stores;
+﻿using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
-using LibLite.Inventero.Core.Models.Pagination;
-using System.Threading.Tasks;
+using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using LibLite.Inventero.Presentation.Desktop.Models.Views;
+using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
-    public partial class GroupsViewModel : ObservableObject
+    public partial class GroupsViewModel : PaginatedListViewModel<Group, IGroupStore>
     {
-        private readonly IGroupStore _store;
+        public GroupsViewModel(IGroupStore store, IDialogService dialogService)
+            : base(store, dialogService) { }
 
-        [ObservableProperty]
-        private PaginatedList<Group> _groups;
-
-        public GroupsViewModel(IGroupStore store)
+        protected override void AddItem()
         {
-            _store = store;
-
-            InitializeAsync();
+            return;
         }
 
-        private async Task InitializeAsync()
+        protected override void CreateDataGridColumns(List<Column> columns)
         {
-            Groups = await _store.GetAsync(new PaginatedListRequest());
+            columns.Add(new Column("Nazwa", nameof(Group.Name)));
         }
     }
 }

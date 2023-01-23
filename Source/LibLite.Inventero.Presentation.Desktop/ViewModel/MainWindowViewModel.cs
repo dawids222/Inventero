@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using LibLite.Inventero.Core.Contracts.Tools;
 using LibLite.Inventero.Presentation.Desktop.Enums;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
@@ -12,8 +13,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         private readonly IEventBus _eventBus;
         private readonly IViewModelService _viewModelService;
 
-        private readonly MainMenuViewModel _mainMenuViewModel;
-
         [ObservableProperty]
         private ObservableObject _menuViewModel;
         [ObservableProperty]
@@ -23,19 +22,12 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         public MainWindowViewModel(
             IEventBus eventBus,
-            IViewModelService viewModelService,
-            MainMenuViewModel mainMenuViewModel)
+            IViewModelService viewModelService)
         {
             _eventBus = eventBus;
             _viewModelService = viewModelService;
 
-            _mainMenuViewModel = mainMenuViewModel;
-
-            MenuViewModel = _mainMenuViewModel;
-            MainViewModel = _viewModelService.Get<PurchasesViewModel>();
-
             _eventBus.Subscribe<ChangeMainViewEvent>(ChangeMainView);
-            _viewModelService = viewModelService;
         }
 
         private void ChangeMainView(ChangeMainViewEvent @event)
@@ -44,10 +36,17 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             {
                 { MainView.Purchases, _viewModelService.Get<PurchasesViewModel>() },
                 { MainView.Products, _viewModelService.Get<ProductsViewModel>() },
-                { MainView.Groups, _viewModelService.Get<PurchasesViewModel>() },
+                { MainView.Groups, _viewModelService.Get<GroupsViewModel>() },
             };
             var viewModel = mainViews[@event.View];
             MainViewModel = viewModel;
+        }
+
+        [RelayCommand]
+        private void LoadViews()
+        {
+            MenuViewModel = _viewModelService.Get<MainMenuViewModel>();
+            MainViewModel = _viewModelService.Get<PurchasesViewModel>();
         }
     }
 }

@@ -6,12 +6,12 @@
         <view:MainMenu DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:PurchasesViewModel}">
-        <view:PurchasesView DataContext="{Binding}"/>
+        <view:PaginatedListView DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:ProductsViewModel}">
-        <view:ProductsView DataContext="{Binding}"/>
+        <view:PaginatedListView DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:GroupsViewModel}">
-        <view:GroupsView DataContext="{Binding}"/>
+        <view:PaginatedListView DataContext="{Binding}"/>
     </DataTemplate>
 </ResourceDictionary>
