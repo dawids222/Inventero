@@ -14,4 +14,7 @@
     <DataTemplate DataType="{x:Type vm:GroupsViewModel}">
         <view:PaginatedListView DataContext="{Binding}"/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ProductViewModel}">
+        <view:ProductView DataContext="{Binding}"/>
+    </DataTemplate>
 </ResourceDictionary>

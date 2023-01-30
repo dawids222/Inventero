@@ -57,7 +57,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             _context.Add(CreateNewEntity());
             _context.Add(entity);
             _context.Add(CreateNewEntity());
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<TDomain>(It.Is<TEntity>(x => _comparer.Compare(x, entity).AreEqual)))
                 .Returns(expected);
@@ -65,6 +65,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             var result = await _store.GetAsync(entity.Id);
 
             Assert.That(result, Is.EqualTo(expected));
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -74,7 +75,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             var exception = new Exception("Error!");
             var entity = CreateNewEntity();
             _context.Add(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<TDomain>(It.IsAny<TEntity>()))
                 .Throws(exception);
@@ -82,6 +83,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             Task act() => _store.GetAsync(entity.Id);
 
             Assert.ThrowsAsync<Exception>(act, exception.Message);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -95,7 +97,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             _context.Add(entity1);
             _context.Add(entity2);
             _context.Add(CreateNewEntity());
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<List<TDomain>>(
                     It.Is<List<TEntity>>(x =>
@@ -108,6 +110,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             var result = await _store.GetAsync(ids);
 
             Assert.That(result, Is.EqualTo(expected));
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -117,7 +120,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             var exception = new Exception("Error!");
             var entity = CreateNewEntity();
             _context.Add(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<List<TDomain>>(It.IsAny<List<TEntity>>()))
                 .Throws(exception);
@@ -126,6 +129,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             Task act() => _store.GetAsync(ids);
 
             Assert.ThrowsAsync<Exception>(act, exception.Message);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -146,7 +150,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             _context.Add(CreateNewEntity());
             _context.Add(entity1);
             _context.Add(entity2);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<List<TDomain>>(
                     It.Is<List<TEntity>>(x =>
@@ -162,6 +166,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             Assert.That(result.TotalPages, Is.EqualTo(2));
             Assert.That(result.HasNextPage, Is.False);
             Assert.That(result.HasPreviousPage, Is.True);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -184,7 +189,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             _context.Add(CreateNewEntity());
             _context.Add(entity1);
             _context.Add(entity2);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<List<TDomain>>(
                     It.Is<List<TEntity>>(x =>
@@ -204,6 +209,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             Assert.That(result.TotalPages, Is.EqualTo(2));
             Assert.That(result.HasNextPage, Is.True);
             Assert.That(result.HasPreviousPage, Is.False);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -234,7 +240,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             _context.Add(CreateNewEntity());
             _context.Add(entity1);
             _context.Add(entity2);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<List<TDomain>>(
                     It.Is<List<TEntity>>(x =>
@@ -249,6 +255,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             Assert.That(result.TotalPages, Is.EqualTo(1));
             Assert.That(result.HasNextPage, Is.False);
             Assert.That(result.HasPreviousPage, Is.False);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -258,7 +265,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             var exception = new Exception("Error!");
             var entity = CreateNewEntity();
             _context.Add(entity);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<List<TDomain>>(It.IsAny<List<TEntity>>()))
                 .Throws(exception);
@@ -267,6 +274,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             Task act() => _store.GetAsync(request);
 
             Assert.ThrowsAsync<Exception>(act, exception.Message);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -290,6 +298,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 .AnyAsync(x => x.Id == entity.Id);
             Assert.That(result, Is.EqualTo(expected));
             Assert.That(isAdded, Is.True);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -319,6 +328,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             Assert.That(_comparer.Compare(currentEntity, entity).AreEqual, Is.False);
             Assert.That(_comparer.Compare(currentEntity, modifiedEntity).AreEqual, Is.True);
             Assert.That(result, Is.EqualTo(expected));
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -350,6 +360,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                     x.Id == entity2.Id);
             Assert.That(_comparer.Compare(expected, result).AreEqual, Is.True);
             Assert.That(areAdded, Is.True);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -391,6 +402,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             Assert.That(_comparer.Compare(currentEntities, entities).AreEqual, Is.False);
             Assert.That(_comparer.Compare(currentEntities, modifiedEntities).AreEqual, Is.True);
             Assert.That(_comparer.Compare(expected, result).AreEqual, Is.True);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -419,11 +431,12 @@ namespace LibLite.Inventero.DAL.Tests.Stores
 
             var result = await _store.StoreAsync(values);
 
-            var currentEntity1 = await _context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == entity1.Id);
-            var currentEntity2 = await _context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == entity2.Id);
+            var currentEntity1 = await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == entity1.Id);
+            var currentEntity2 = await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(x => x.Id == entity2.Id);
             Assert.That(_comparer.Compare(currentEntity1, modifiedEntity1).AreEqual, Is.True);
             Assert.That(_comparer.Compare(currentEntity2, entity2).AreEqual, Is.True);
             Assert.That(_comparer.Compare(expected, result).AreEqual, Is.True);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -441,6 +454,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 .Set<TEntity>()
                 .AnyAsync(x => x.Id == entity.Id);
             Assert.That(exists, Is.False);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -457,6 +471,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 .Set<TEntity>()
                 .CountAsync();
             Assert.That(count, Is.EqualTo(1));
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -478,6 +493,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 .Set<TEntity>()
                 .AnyAsync(x => ids.Contains(x.Id));
             Assert.That(exist, Is.False);
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -503,6 +519,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 .CountAsync();
             Assert.That(exists, Is.False);
             Assert.That(count, Is.EqualTo(3));
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
 
@@ -528,6 +545,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 .CountAsync();
             Assert.That(exists, Is.False);
             Assert.That(count, Is.EqualTo(4));
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
             Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
         }
     }

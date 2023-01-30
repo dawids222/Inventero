@@ -22,6 +22,10 @@
             Group = group;
         }
 
+        public Product(string name, double price, Group group)
+            : this(Guid.Empty, name, price, group)
+        { }
+
         public Product(Product original) : this(
             original.Id,
             original.Name,
