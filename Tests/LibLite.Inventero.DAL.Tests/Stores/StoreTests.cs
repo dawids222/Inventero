@@ -333,6 +333,33 @@ namespace LibLite.Inventero.DAL.Tests.Stores
         }
 
         [Test]
+        public async Task StoreAsync_NotModifiedEntity_UpdatesEntityInDatabase()
+        {
+            var expected = CreateNewIdentifiable();
+            var value = CreateNewIdentifiable();
+            var entity = CreateNewEntity();
+            _context.Add(entity);
+            await _context.SaveChangesAndClearAsync();
+            _mapperMock
+                .Setup(x => x.Map<TEntity>(value))
+                .Returns(entity);
+            _mapperMock
+                .Setup(x => x.Map<TDomain>(entity))
+                .Returns(expected);
+
+            var result = await _store.StoreAsync(value);
+
+            var currentEntity = await _context
+                .Set<TEntity>()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == entity.Id);
+            Assert.That(_comparer.Compare(currentEntity, entity).AreEqual, Is.True);
+            Assert.That(result, Is.EqualTo(expected));
+            Assert.That(_context.ChangeTracker.Entries().Any(), Is.False);
+            Assert.That(_context.ChangeTracker.HasChanges(), Is.False);
+        }
+
+        [Test]
         public async Task StoreAsync_NewEntities_AddsEntitiesToDatabase()
         {
             var expected1 = CreateNewIdentifiable();
