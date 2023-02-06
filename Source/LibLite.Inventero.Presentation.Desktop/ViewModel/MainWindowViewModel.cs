@@ -2,11 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Contracts.Tools;
-using LibLite.Inventero.Core.Models.Domain;
-using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Enums;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Events;
+using System;
 using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
@@ -42,24 +41,39 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         private void ChangeMainView(ChangeMainViewEvent @event)
         {
-            Dictionary<MainView, ObservableObject> mainViews = new()
+            Dictionary<MainView, Func<ObservableObject>> mainViews = new()
             {
-                { MainView.Purchases, _viewModelService.Get<PurchasesViewModel>() },
-                { MainView.Products, _viewModelService.Get<ProductsViewModel>() },
-                { MainView.Groups, _viewModelService.Get<GroupsViewModel>() },
-                { MainView.Product, _viewModelService.Get<ProductViewModel>() },
+                { MainView.Purchases,  () =>
+                    {
+                        var viewModel = _viewModelService.Get<PurchasesViewModel>();
+                        viewModel.LoadItemsCommand.Execute(null);
+                        return viewModel;
+                    }
+                },
+                { MainView.Products, () =>
+                    {
+                        var viewModel = _viewModelService.Get<ProductsViewModel>();
+                        viewModel.LoadItemsCommand.Execute(null);
+                        return viewModel;
+                    }
+                },
+                { MainView.Groups, () =>
+                    {
+                        var viewModel = _viewModelService.Get<GroupsViewModel>();
+                        viewModel.LoadItemsCommand.Execute(null);
+                        return viewModel;
+                    }
+                },
+                { MainView.Product, () => _viewModelService.Get<ProductViewModel>() },
+                { MainView.Group, () => _viewModelService.Get<GroupViewModel>() },
             };
             var viewModel = mainViews[@event.View];
-            MainViewModel = viewModel;
+            MainViewModel = viewModel.Invoke();
         }
 
         [RelayCommand]
         private async void LoadViews()
         {
-            var groups = await _groupStore.GetAsync(new PaginatedListRequest());
-            var product = new Product("Test", 3.24, new Group(default, "Test"));
-            await _productStore.StoreAsync(product);
-
             MenuViewModel = _viewModelService.Get<MainMenuViewModel>();
             MainViewModel = _viewModelService.Get<PurchasesViewModel>();
         }

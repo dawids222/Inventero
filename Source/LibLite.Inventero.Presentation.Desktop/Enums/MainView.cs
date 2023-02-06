@@ -5,6 +5,8 @@
         Purchases,
         Products,
         Groups,
+        Purchase,
         Product,
+        Group,
     }
 }

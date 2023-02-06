@@ -1,0 +1,40 @@
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using LibLite.Inventero.Core.Contracts.Stores;
+using LibLite.Inventero.Core.Contracts.Tools;
+using LibLite.Inventero.Core.Models.Domain;
+using LibLite.Inventero.Presentation.Desktop.Enums;
+using System;
+using System.Collections.Generic;
+
+namespace LibLite.Inventero.Presentation.Desktop.ViewModel
+{
+    public partial class GroupViewModel : ItemViewModel<Group, IGroupStore>
+    {
+        [ObservableProperty]
+        private string _name = string.Empty;
+
+        public GroupViewModel(IGroupStore store, IEventBus bus) : base(store, bus) { }
+
+        protected override MainView PreviousView => MainView.Groups;
+
+        protected override IEnumerable<Input> CreateInputs()
+        {
+            return new Input[]
+            {
+                new StringInput("Nazwa", nameof(Group.Name)),
+            };
+        }
+
+        protected override void Load() { }
+
+        protected override Group CreateItem()
+        {
+            return new Group(Guid.Empty, Name);
+        }
+
+        protected override bool ValidateItem(Group item)
+        {
+            return !string.IsNullOrWhiteSpace(item.Name);
+        }
+    }
+}

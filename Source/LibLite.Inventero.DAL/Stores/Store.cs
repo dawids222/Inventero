@@ -1,4 +1,12 @@
-﻿namespace LibLite.Inventero.DAL.Stores
+﻿using LibLite.Inventero.Core.Contracts.Stores;
+using LibLite.Inventero.Core.Contracts.Tools;
+using LibLite.Inventero.Core.Models.Domain;
+using LibLite.Inventero.Core.Models.Pagination;
+using LibLite.Inventero.DAL.Entities;
+using LibLite.Inventero.DAL.Extensions;
+using Microsoft.EntityFrameworkCore;
+
+namespace LibLite.Inventero.DAL.Stores
 {
     public abstract class Store<TDomain, TEntity> : IStore<TDomain>
         where TDomain : Identifiable, new()
