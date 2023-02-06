@@ -50,7 +50,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         protected override Purchase CreateItem()
         {
-            return new Purchase(Guid.Empty, Amount, UnitPrice, Date, Product);
+            return new Purchase(Amount, UnitPrice, Date, Product);
         }
 
         protected override bool ValidateItem(Purchase item)

@@ -9,20 +9,24 @@
 
         public Purchase()
         {
-            Id = Guid.Empty;
             Amount = 0;
             UnitPrice = 0;
             Date = DateTime.MinValue;
             Product = null;
         }
 
-        public Purchase(Guid id, int amount, double unitPrice, DateTime date, Product product)
+        public Purchase(int amount, double unitPrice, DateTime date, Product product)
         {
-            Id = id;
             Amount = amount;
             UnitPrice = unitPrice;
             Date = date;
             Product = product;
+        }
+
+        public Purchase(long id, int amount, double unitPrice, DateTime date, Product product)
+            : this(amount, unitPrice, date, product)
+        {
+            Id = id;
         }
 
         public Purchase(Purchase original) : this(

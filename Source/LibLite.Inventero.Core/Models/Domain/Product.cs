@@ -8,23 +8,23 @@
 
         public Product()
         {
-            Id = Guid.Empty;
             Name = string.Empty;
             Price = 0;
             Group = null;
         }
 
-        public Product(Guid id, string name, double price, Group group)
+        public Product(string name, double price, Group group)
         {
-            Id = id;
             Name = name;
             Price = price;
             Group = group;
         }
 
-        public Product(string name, double price, Group group)
-            : this(Guid.Empty, name, price, group)
-        { }
+        public Product(long id, string name, double price, Group group)
+            : this(name, price, group)
+        {
+            Id = id;
+        }
 
         public Product(Product original) : this(
             original.Id,

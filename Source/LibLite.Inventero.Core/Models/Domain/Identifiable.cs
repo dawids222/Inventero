@@ -2,6 +2,6 @@
 {
     public abstract class Identifiable
     {
-        public Guid Id { get; init; }
+        public long Id { get; init; }
     }
 }

@@ -19,9 +19,9 @@ namespace LibLite.Inventero.DAL.Migrations.SQLite
 
             modelBuilder.Entity("LibLite.Inventero.DAL.Entities.GroupEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -35,12 +35,12 @@ namespace LibLite.Inventero.DAL.Migrations.SQLite
 
             modelBuilder.Entity("LibLite.Inventero.DAL.Entities.ProductEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("GroupId")
-                        .HasColumnType("TEXT");
+                    b.Property<long?>("GroupId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -59,9 +59,9 @@ namespace LibLite.Inventero.DAL.Migrations.SQLite
 
             modelBuilder.Entity("LibLite.Inventero.DAL.Entities.PurchaseEntity", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Amount")
                         .HasColumnType("INTEGER");
@@ -69,8 +69,8 @@ namespace LibLite.Inventero.DAL.Migrations.SQLite
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("TEXT");
+                    b.Property<long?>("ProductId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<double>("UnitPrice")
                         .HasColumnType("REAL");

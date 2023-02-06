@@ -6,14 +6,17 @@
 
         public Group()
         {
-            Id = Guid.Empty;
             Name = string.Empty;
         }
 
-        public Group(Guid id, string name)
+        public Group(string name)
+        {
+            Name = name;
+        }
+
+        public Group(long id, string name) : this(name)
         {
             Id = id;
-            Name = name;
         }
 
         public Group(Group original) : this(

@@ -3,7 +3,6 @@ using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Contracts.Tools;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Presentation.Desktop.Enums;
-using System;
 using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
@@ -29,7 +28,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         protected override Group CreateItem()
         {
-            return new Group(Guid.Empty, Name);
+            return new Group(Name);
         }
 
         protected override bool ValidateItem(Group item)

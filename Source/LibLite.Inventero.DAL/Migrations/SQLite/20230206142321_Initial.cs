@@ -15,7 +15,8 @@ namespace LibLite.Inventero.DAL.Migrations.SQLite
                 name: "Groups",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
@@ -27,10 +28,11 @@ namespace LibLite.Inventero.DAL.Migrations.SQLite
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
                     Price = table.Column<double>(type: "REAL", nullable: false),
-                    GroupId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    GroupId = table.Column<long>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,11 +48,12 @@ namespace LibLite.Inventero.DAL.Migrations.SQLite
                 name: "Purchases",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<long>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     Amount = table.Column<int>(type: "INTEGER", nullable: false),
                     UnitPrice = table.Column<double>(type: "REAL", nullable: false),
                     Date = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ProductId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    ProductId = table.Column<long>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {

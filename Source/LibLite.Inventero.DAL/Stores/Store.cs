@@ -21,7 +21,7 @@ namespace LibLite.Inventero.DAL.Stores
             _mapper = mapper;
         }
 
-        public async Task<TDomain> GetAsync(Guid id)
+        public async Task<TDomain> GetAsync(long id)
         {
             var entity = await _context
                 .Set<TEntity>()
@@ -30,7 +30,7 @@ namespace LibLite.Inventero.DAL.Stores
             return _mapper.Map<TDomain>(entity);
         }
 
-        public async Task<IEnumerable<TDomain>> GetAsync(IEnumerable<Guid> ids)
+        public async Task<IEnumerable<TDomain>> GetAsync(IEnumerable<long> ids)
         {
             var entities = await _context
                 .Set<TEntity>()
@@ -80,7 +80,7 @@ namespace LibLite.Inventero.DAL.Stores
             return _mapper.Map<List<TDomain>>(entities);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(long id)
         {
             var entity = await _context
                 .Set<TEntity>()
@@ -91,7 +91,7 @@ namespace LibLite.Inventero.DAL.Stores
             await _context.SaveChangesAndClearAsync();
         }
 
-        public async Task DeleteAsync(IEnumerable<Guid> ids)
+        public async Task DeleteAsync(IEnumerable<long> ids)
         {
             var entities = await _context
                 .Set<TEntity>()

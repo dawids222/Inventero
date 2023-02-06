@@ -106,7 +106,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                             _comparer.Compare(x, entity2).AreEqual))))
                 .Returns(expected);
 
-            var ids = new Guid[] { entity1.Id, entity2.Id };
+            var ids = new long[] { entity1.Id, entity2.Id };
             var result = await _store.GetAsync(ids);
 
             Assert.That(result, Is.EqualTo(expected));
@@ -125,7 +125,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 .Setup(x => x.Map<List<TDomain>>(It.IsAny<List<TEntity>>()))
                 .Throws(exception);
 
-            var ids = new Guid[] { entity.Id };
+            var ids = new long[] { entity.Id };
             Task act() => _store.GetAsync(ids);
 
             Assert.ThrowsAsync<Exception>(act, exception.Message);
@@ -182,19 +182,17 @@ namespace LibLite.Inventero.DAL.Tests.Stores
                 pageSize: pageSize,
                 totalItems: 4);
             var entity1 = CreateNewEntity();
-            entity1.Id = Guid.Parse("00000000-0000-0000-0000-000000000002");
             var entity2 = CreateNewEntity();
-            entity2.Id = Guid.Parse("00000000-0000-0000-0000-000000000001");
-            _context.Add(CreateNewEntity());
-            _context.Add(CreateNewEntity());
             _context.Add(entity1);
             _context.Add(entity2);
+            _context.Add(CreateNewEntity());
+            _context.Add(CreateNewEntity());
             await _context.SaveChangesAndClearAsync();
             _mapperMock
                 .Setup(x => x.Map<List<TDomain>>(
                     It.Is<List<TEntity>>(x =>
-                        x.ElementAt(0).Id == entity2.Id &&
-                        x.ElementAt(1).Id == entity1.Id)))
+                        x.ElementAt(0).Id == entity1.Id &&
+                        x.ElementAt(1).Id == entity2.Id)))
                 .Returns(mapped);
 
             var sorts = new Sort[] { new Sort
@@ -491,7 +489,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             _context.Add(CreateNewEntity());
             await _context.SaveChangesAndClearAsync();
 
-            var id = Guid.NewGuid();
+            var id = 1234;
             await _store.DeleteAsync(id);
 
             var count = await _context
@@ -535,7 +533,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             _context.Add(CreateNewEntity());
             await _context.SaveChangesAndClearAsync();
 
-            var ids = new[] { entity1.Id, Guid.NewGuid() };
+            var ids = new long[] { entity1.Id, 1234 };
             await _store.DeleteAsync(ids);
 
             var exists = await _context
@@ -561,7 +559,7 @@ namespace LibLite.Inventero.DAL.Tests.Stores
             _context.Add(CreateNewEntity());
             await _context.SaveChangesAndClearAsync();
 
-            var ids = new[] { Guid.NewGuid(), Guid.NewGuid() };
+            var ids = new long[] { 1234, 4321 };
             await _store.DeleteAsync(ids);
 
             var exists = await _context
