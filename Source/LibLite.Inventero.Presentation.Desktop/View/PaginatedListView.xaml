@@ -41,7 +41,11 @@
                     HorizontalAlignment="Right">
             <Label Content="Szukaj"/>
             <TextBox Width="180"
-                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged }"/>
+                     Text="{Binding Search, UpdateSourceTrigger=PropertyChanged }">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding LoadItemsCommand}" Key="Enter"/>
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Width="32"
                     Style="{StaticResource MahApps.Styles.Button.Square}"
                     BorderThickness="1"
@@ -126,6 +130,7 @@
                     BorderBrush="{StaticResource MahApps.Brushes.Border.NonActive}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
+                    IsEnabled="{Binding Items.HasPreviousPage}"
                     Command="{Binding DecrementPageCommand}"/>
             <TextBox Height="{Binding Path=Height, ElementName=PrevBtn}"
                      Width="{Binding Path=Width, ElementName=PrevBtn}"
@@ -149,6 +154,7 @@
                     BorderBrush="{Binding Path=BorderBrush, ElementName=PrevBtn}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
+                    IsEnabled="{Binding Items.HasNextPage}"
                     Command="{Binding IncrementPageCommand}"/>
         </StackPanel>
     </Grid>

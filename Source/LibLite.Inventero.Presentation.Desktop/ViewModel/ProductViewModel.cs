@@ -33,6 +33,11 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         public DoubleInput(string label, string binding) : base(label, binding) { }
     }
 
+    public class DatePickerInput : Input
+    {
+        public DatePickerInput(string label, string binding) : base(label, binding) { }
+    }
+
     public class DropDownInput : Input
     {
         public string SearchBinding { get; set; }
@@ -149,7 +154,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         }
 
         [RelayCommand]
-        protected async void Selected()
+        protected virtual async void Selected()
         {
             _selected = true;
             return;

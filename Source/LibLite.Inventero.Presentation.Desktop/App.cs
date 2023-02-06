@@ -54,6 +54,7 @@ namespace LibLite.Inventero.Presentation.Desktop
             services.AddSingleton<ProductsViewModel>();
             services.AddSingleton<GroupsViewModel>();
 
+            services.AddTransient<PurchaseViewModel>();
             services.AddTransient<ProductViewModel>();
             services.AddTransient<GroupViewModel>();
 

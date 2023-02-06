@@ -64,6 +64,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
                         return viewModel;
                     }
                 },
+                { MainView.Purchase, () => _viewModelService.Get<PurchaseViewModel>() },
                 { MainView.Product, () => _viewModelService.Get<ProductViewModel>() },
                 { MainView.Group, () => _viewModelService.Get<GroupViewModel>() },
             };

@@ -74,6 +74,30 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                     panel.Children.Add(textBox);
                     Content.Children.Add(panel);
                 }
+                if (input is DatePickerInput)
+                {
+                    var label = new Label()
+                    {
+                        Width = LABEL_WIDTH,
+                        Content = input.Label,
+                    };
+                    var datePicker = new DatePicker()
+                    {
+                        Width = INPUT_WIDTH,
+                    };
+                    var binding = new Binding(input.Binding)
+                    {
+                        Source = viewModel,
+                    };
+                    datePicker.SetBinding(DatePicker.TextProperty, binding);
+                    var panel = new StackPanel
+                    {
+                        Orientation = Orientation.Horizontal
+                    };
+                    panel.Children.Add(label);
+                    panel.Children.Add(datePicker);
+                    Content.Children.Add(panel);
+                }
                 if (input is DropDownInput i)
                 {
                     var label = new Label()
