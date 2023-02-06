@@ -172,10 +172,10 @@ namespace LibLite.Inventero.Presentation.Desktop.View
             var comboBox = (ComboBox)sender;
             var textBox = (TextBox)comboBox.Template.FindName("PART_EditableTextBox", comboBox);
             textBox.Tag = comboBox;
-            textBox.TextChanged += ProductView_TextChanged;
+            textBox.TextChanged += TextBox_TextChanged;
         }
 
-        private void ProductView_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var textBox = (TextBoxBase)sender;
             var comboBox = (ComboBox)textBox.Tag;

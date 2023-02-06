@@ -78,10 +78,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         }
 
         [RelayCommand]
-        private async void EditItem(TItem item)
-        {
-            return;
-        }
+        protected abstract void EditItem(TItem item);
 
         [RelayCommand]
         private async void DeleteItem(TItem item)

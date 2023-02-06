@@ -10,6 +10,8 @@ using MahApps.Metro.Controls.Dialogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 
 namespace LibLite.Inventero.Presentation.Desktop
@@ -23,6 +25,7 @@ namespace LibLite.Inventero.Presentation.Desktop
         {
             Services = RegisterServices();
             ConfigureServices(Services);
+            SetDefaultDateTimeFormat();
 
             InitializeComponent();
         }
@@ -60,6 +63,24 @@ namespace LibLite.Inventero.Presentation.Desktop
             services.AddTransient<GroupViewModel>();
 
             return services.BuildServiceProvider();
+        }
+
+        private static void SetDefaultDateTimeFormat()
+        {
+            var newCulture = new CultureInfo(CultureInfo.CurrentCulture.Name);
+
+            newCulture.DateTimeFormat.ShortDatePattern = "dd.MM.yyyy";
+
+            CultureInfo.DefaultThreadCurrentCulture = newCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = newCulture;
+
+            Thread.CurrentThread.CurrentCulture = newCulture;
+            Thread.CurrentThread.CurrentUICulture = newCulture;
+
+            FrameworkElement.LanguageProperty.OverrideMetadata(
+                typeof(FrameworkElement),
+                new FrameworkPropertyMetadata(
+                    System.Windows.Markup.XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
         }
 
         private static void ConfigureServices(IServiceProvider services)

@@ -19,6 +19,11 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewService.ShowGroupView();
         }
 
+        protected override void EditItem(Group item)
+        {
+            _viewService.ShowGroupView(item);
+        }
+
         protected override void CreateDataGridColumns(List<Column> columns)
         {
             columns.Add(new Column("Nazwa", nameof(Group.Name)));

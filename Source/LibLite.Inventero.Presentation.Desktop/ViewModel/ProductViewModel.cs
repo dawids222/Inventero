@@ -124,7 +124,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
     {
         protected readonly TRelationshipStore _relationshipStore;
 
-        private bool _selected = false;
+        protected bool _selected = false;
 
         protected RelationshipItemViewModel(
             TStore store,
@@ -223,9 +223,12 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         public override void LoadItem(Product item)
         {
+            _selected = true;
+
             Id = item.Id;
             Name = item.Name;
             Price = item.Price;
+            Groups = new PaginatedList<Group>(new Group[] { item.Group }, 0, 1, 1);
             Group = item.Group;
         }
 

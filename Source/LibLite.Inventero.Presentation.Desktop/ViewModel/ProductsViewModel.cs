@@ -19,6 +19,11 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewService.ShowPurchaseView();
         }
 
+        protected override void EditItem(Product item)
+        {
+            _viewService.ShowProductView(item);
+        }
+
         protected override void CreateDataGridColumns(List<Column> columns)
         {
             // TODO: Use string resources

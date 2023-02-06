@@ -19,12 +19,17 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewService.ShowPurchaseView();
         }
 
+        protected override void EditItem(Purchase item)
+        {
+            _viewService.ShowPurchaseView(item);
+        }
+
         protected override void CreateDataGridColumns(List<Column> columns)
         {
             columns.Add(new Column("Produkt", $"{nameof(Purchase.Product)}.{nameof(Purchase.Product.Name)}"));
             columns.Add(new Column("Liczba", nameof(Purchase.Amount)));
             columns.Add(new Column("Cena Jednostkowa", nameof(Purchase.UnitPrice)));
-            columns.Add(new Column("Data Zakupu", nameof(Purchase.Date)));
+            columns.Add(new Column("Data Zakupu", nameof(Purchase.Date), "d"));
         }
     }
 }

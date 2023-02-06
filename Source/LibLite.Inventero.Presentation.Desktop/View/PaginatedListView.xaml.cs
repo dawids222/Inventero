@@ -15,10 +15,10 @@ namespace LibLite.Inventero.Presentation.Desktop.View
         {
             InitializeComponent();
 
-            DataContextChanged += ProductsView_DataContextChanged;
+            DataContextChanged += PaginatedListView_DataContextChanged;
         }
 
-        private void ProductsView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        private void PaginatedListView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
         {
             var columns = (DataContext as dynamic).Columns as IEnumerable<Column>;
             foreach (var column in columns)
@@ -30,17 +30,28 @@ namespace LibLite.Inventero.Presentation.Desktop.View
             ItemsDataGrid.Columns.Add(firstColumn);
         }
 
-        private DataGridTextColumn CreateTextColumn(Column column)
+        private static DataGridTextColumn CreateTextColumn(Column column)
         {
+            var binding = CreateTextColumnBinding(column);
             return new DataGridTextColumn
             {
                 Header = column.Header,
-                Binding = new Binding(column.Property),
+                Binding = binding,
                 Width = new DataGridLength(1, DataGridLengthUnitType.Star),
                 FontSize = 16,
                 IsReadOnly = true,
                 CanUserSort = false,
             };
+        }
+
+        private static Binding CreateTextColumnBinding(Column column)
+        {
+            var binding = new Binding(column.Property);
+            if (!string.IsNullOrEmpty(column.StringFormat))
+            {
+                binding.StringFormat = column.StringFormat;
+            }
+            return binding;
         }
     }
 }

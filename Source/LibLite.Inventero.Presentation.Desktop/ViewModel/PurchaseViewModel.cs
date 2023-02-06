@@ -50,7 +50,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         protected override Purchase CreateItem()
         {
-            return new Purchase(Amount, UnitPrice, Date, Product);
+            return new Purchase(Id, Amount, UnitPrice, Date, Product);
         }
 
         protected override bool ValidateItem(Purchase item)
@@ -74,15 +74,18 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         protected override void Selected()
         {
             base.Selected();
-            UnitPrice = Product.Price;
+            UnitPrice = Product?.Price ?? default;
         }
 
         public override void LoadItem(Purchase item)
         {
+            _selected = true;
+
             Id = item.Id;
             Amount = item.Amount;
             UnitPrice = item.UnitPrice;
             Date = item.Date;
+            Products = new PaginatedList<Product>(new Product[] { item.Product }, 0, 1, 1);
             Product = item.Product;
         }
 
