@@ -1,11 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LibLite.Inventero.Core.Contracts.Stores;
-using LibLite.Inventero.Core.Contracts.Tools;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
-using LibLite.Inventero.Presentation.Desktop.Enums;
-using LibLite.Inventero.Presentation.Desktop.Models.Events;
+using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using System.Collections.Generic;
 using System.Windows.Input;
 
@@ -69,7 +67,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
     public abstract partial class ItemViewModel : ObservableObject
     {
         public IEnumerable<Input> Inputs { get; private set; }
-        protected abstract MainView PreviousView { get; }
 
         public ItemViewModel()
         {
@@ -84,12 +81,14 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         where TStore : IStore<TItem>
     {
         protected readonly TStore _store;
-        protected readonly IEventBus _bus;
+        protected readonly IViewService _viewService;
 
-        protected ItemViewModel(TStore store, IEventBus bus)
+        protected long Id { get; set; }
+
+        protected ItemViewModel(TStore store, IViewService viewService)
         {
             _store = store;
-            _bus = bus;
+            _viewService = viewService;
         }
 
         [RelayCommand]
@@ -112,11 +111,9 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             GoBack();
         }
 
-        private void GoBack()
-        {
-            var @event = new ChangeMainViewEvent(PreviousView);
-            _bus.Publish(@event);
-        }
+        protected abstract void GoBack();
+
+        public abstract void LoadItem(TItem item);
     }
 
     public abstract partial class RelationshipItemViewModel<TItem, TStore, TRelationshipItem, TRelationshipStore> : ItemViewModel<TItem, TStore>
@@ -129,8 +126,11 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         private bool _selected = false;
 
-        protected RelationshipItemViewModel(TStore store, TRelationshipStore relationshipStore, IEventBus bus)
-            : base(store, bus)
+        protected RelationshipItemViewModel(
+            TStore store,
+            IViewService viewService,
+            TRelationshipStore relationshipStore)
+            : base(store, viewService)
         {
             _relationshipStore = relationshipStore;
         }
@@ -174,13 +174,11 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         [ObservableProperty]
         private PaginatedList<Group> _groups;
 
-        protected override MainView PreviousView => MainView.Products;
-
         public ProductViewModel(
-            IProductStore productStore,
-            IGroupStore groupStore,
-            IEventBus bus)
-            : base(productStore, groupStore, bus) { }
+            IProductStore store,
+            IViewService viewService,
+            IGroupStore relationshipStore)
+            : base(store, viewService, relationshipStore) { }
 
         protected override IEnumerable<Input> CreateInputs()
         {
@@ -202,7 +200,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         protected override Product CreateItem()
         {
-            return new Product(Name, Price, Group);
+            return new Product(Id, Name, Price, Group);
         }
 
         protected override bool ValidateItem(Product item)
@@ -221,6 +219,19 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
                 Search = GroupSearch,
             };
             Groups = await _relationshipStore.GetAsync(request);
+        }
+
+        public override void LoadItem(Product item)
+        {
+            Id = item.Id;
+            Name = item.Name;
+            Price = item.Price;
+            Group = item.Group;
+        }
+
+        protected override void GoBack()
+        {
+            _viewService.ShowProductsView();
         }
     }
 }

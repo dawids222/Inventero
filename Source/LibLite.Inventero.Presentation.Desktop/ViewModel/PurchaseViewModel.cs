@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using LibLite.Inventero.Core.Contracts.Stores;
-using LibLite.Inventero.Core.Contracts.Tools;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
-using LibLite.Inventero.Presentation.Desktop.Enums;
+using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -24,10 +23,11 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         [ObservableProperty]
         private DateTime _date = DateTime.UtcNow;
 
-        public PurchaseViewModel(IPurchaseStore store, IProductStore relationshipStore, IEventBus bus)
-            : base(store, relationshipStore, bus) { }
-
-        protected override MainView PreviousView => MainView.Purchases;
+        public PurchaseViewModel(
+            IPurchaseStore store,
+            IViewService viewService,
+            IProductStore relationshipStore)
+            : base(store, viewService, relationshipStore) { }
 
         protected override IEnumerable<Input> CreateInputs()
         {
@@ -75,6 +75,20 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         {
             base.Selected();
             UnitPrice = Product.Price;
+        }
+
+        public override void LoadItem(Purchase item)
+        {
+            Id = item.Id;
+            Amount = item.Amount;
+            UnitPrice = item.UnitPrice;
+            Date = item.Date;
+            Product = item.Product;
+        }
+
+        protected override void GoBack()
+        {
+            _viewService.ShowPurchasesView();
         }
     }
 }

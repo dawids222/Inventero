@@ -17,6 +17,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
     {
         private readonly TStore _store;
         private readonly IDialogService _dialogService;
+        protected readonly IViewService _viewService;
 
         [ObservableProperty]
         private int _pageNumber = 1;
@@ -29,10 +30,14 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         [ObservableProperty]
         private List<Column> _columns;
 
-        protected PaginatedListViewModel(TStore store, IDialogService dialogService)
+        protected PaginatedListViewModel(
+            TStore store,
+            IDialogService dialogService,
+            IViewService viewService)
         {
             _store = store;
             _dialogService = dialogService;
+            _viewService = viewService;
             Initialize();
         }
 

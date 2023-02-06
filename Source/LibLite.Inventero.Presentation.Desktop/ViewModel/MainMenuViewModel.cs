@@ -1,33 +1,25 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LibLite.Inventero.Core.Contracts.Tools;
-using LibLite.Inventero.Presentation.Desktop.Enums;
-using LibLite.Inventero.Presentation.Desktop.Models.Events;
+using LibLite.Inventero.Presentation.Desktop.Interfaces;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
     public partial class MainMenuViewModel : ObservableObject
     {
-        private readonly IEventBus _eventBus;
+        private readonly IViewService _viewService;
 
-        public MainMenuViewModel(IEventBus eventBus)
+        public MainMenuViewModel(IViewService viewService)
         {
-            _eventBus = eventBus;
+            _viewService = viewService;
         }
 
         [RelayCommand]
-        private void ShowPurchasesView() => ChangeMainView(MainView.Purchases);
+        private void ShowPurchasesView() => _viewService.ShowPurchasesView();
         [RelayCommand]
-        private void ShowProductsView() => ChangeMainView(MainView.Products);
+        private void ShowProductsView() => _viewService.ShowProductsView();
         [RelayCommand]
-        private void ShowGroupsView() => ChangeMainView(MainView.Groups);
+        private void ShowGroupsView() => _viewService.ShowGroupsView();
         [RelayCommand]
         private void ShowInventoryView() { }
-
-        private void ChangeMainView(MainView view)
-        {
-            var @event = new ChangeMainViewEvent(view);
-            _eventBus.Publish(@event);
-        }
     }
 }
