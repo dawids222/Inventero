@@ -67,7 +67,7 @@
                   AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Akcje"
-                                        Width="*"
+                                        Width="120"
                                         IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

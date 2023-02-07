@@ -11,7 +11,6 @@ namespace LibLite.Inventero.Presentation.Desktop.View
     /// </summary>
     public partial class ItemView : UserControl
     {
-        private const int LABEL_WIDTH = 100;
         private const int INPUT_WIDTH = 300;
 
         public ItemView()
@@ -30,7 +29,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                 {
                     var label = new Label()
                     {
-                        Width = LABEL_WIDTH,
+                        Width = INPUT_WIDTH,
                         Content = input.Label,
                     };
                     var textBox = new TextBox()
@@ -42,10 +41,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                         Source = viewModel,
                     };
                     textBox.SetBinding(TextBox.TextProperty, binding);
-                    var panel = new StackPanel
-                    {
-                        Orientation = Orientation.Horizontal
-                    };
+                    var panel = CreateInputStackPanel();
                     panel.Children.Add(label);
                     panel.Children.Add(textBox);
                     Content.Children.Add(panel);
@@ -54,7 +50,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                 {
                     var label = new Label()
                     {
-                        Width = LABEL_WIDTH,
+                        Width = INPUT_WIDTH,
                         Content = input.Label,
                     };
                     var textBox = new TextBox()
@@ -66,10 +62,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                         Source = viewModel,
                     };
                     textBox.SetBinding(TextBox.TextProperty, binding);
-                    var panel = new StackPanel
-                    {
-                        Orientation = Orientation.Horizontal
-                    };
+                    var panel = CreateInputStackPanel();
                     panel.Children.Add(label);
                     panel.Children.Add(textBox);
                     Content.Children.Add(panel);
@@ -78,7 +71,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                 {
                     var label = new Label()
                     {
-                        Width = LABEL_WIDTH,
+                        Width = INPUT_WIDTH,
                         Content = input.Label,
                     };
                     var datePicker = new DatePicker()
@@ -90,10 +83,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                         Source = viewModel,
                     };
                     datePicker.SetBinding(DatePicker.TextProperty, binding);
-                    var panel = new StackPanel
-                    {
-                        Orientation = Orientation.Horizontal
-                    };
+                    var panel = CreateInputStackPanel();
                     panel.Children.Add(label);
                     panel.Children.Add(datePicker);
                     Content.Children.Add(panel);
@@ -102,7 +92,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                 {
                     var label = new Label()
                     {
-                        Width = LABEL_WIDTH,
+                        Width = INPUT_WIDTH,
                         Content = input.Label,
                     };
                     var comboBox = new ComboBox()
@@ -138,10 +128,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                         Source = viewModel,
                     };
                     comboBox.SetBinding(TextBox.TextProperty, binding);
-                    var panel = new StackPanel
-                    {
-                        Orientation = Orientation.Horizontal
-                    };
+                    var panel = CreateInputStackPanel();
                     panel.Children.Add(label);
                     panel.Children.Add(comboBox);
                     Content.Children.Add(panel);
@@ -150,6 +137,16 @@ namespace LibLite.Inventero.Presentation.Desktop.View
             var buttons = Content.Children[0];
             Content.Children.RemoveAt(0);
             Content.Children.Add(buttons);
+        }
+
+        private static StackPanel CreateInputStackPanel()
+        {
+            return new StackPanel
+            {
+                Orientation = Orientation.Vertical,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 10),
+            };
         }
 
         private void ComboBox_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
