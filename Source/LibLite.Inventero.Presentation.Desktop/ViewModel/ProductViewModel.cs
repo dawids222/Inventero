@@ -5,6 +5,7 @@ using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
@@ -82,13 +83,18 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
     {
         protected readonly TStore _store;
         protected readonly IViewService _viewService;
+        protected readonly IDialogService _dialogService;
 
         protected long Id { get; set; }
 
-        protected ItemViewModel(TStore store, IViewService viewService)
+        protected ItemViewModel(
+            TStore store,
+            IViewService viewService,
+            IDialogService dialogService)
         {
             _store = store;
             _viewService = viewService;
+            _dialogService = dialogService;
         }
 
         [RelayCommand]
@@ -97,10 +103,17 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         protected abstract bool ValidateItem(TItem item);
 
         [RelayCommand]
-        private async void AddItem()
+        private async Task AddItem()
         {
             var item = CreateItem();
-            if (!ValidateItem(item)) { return; } // TODO: Show error message?
+            if (!ValidateItem(item))
+            {
+                // TODO: Move to resources.
+                // TODO: Provide more reasonable messages.
+                var error = "Wpisane dane są niepoprawne.";
+                await _dialogService.ShowErrorAsync(error);
+                return;
+            }
             await _store.StoreAsync(item);
             GoBack();
         }
@@ -129,8 +142,9 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         protected RelationshipItemViewModel(
             TStore store,
             IViewService viewService,
+            IDialogService dialogService,
             TRelationshipStore relationshipStore)
-            : base(store, viewService)
+            : base(store, viewService, dialogService)
         {
             _relationshipStore = relationshipStore;
         }
@@ -177,8 +191,9 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         public ProductViewModel(
             IProductStore store,
             IViewService viewService,
+            IDialogService dialogService,
             IGroupStore relationshipStore)
-            : base(store, viewService, relationshipStore) { }
+            : base(store, viewService, dialogService, relationshipStore) { }
 
         protected override IEnumerable<Input> CreateInputs()
         {

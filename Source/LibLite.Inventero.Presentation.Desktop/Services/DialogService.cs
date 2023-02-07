@@ -8,12 +8,14 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
     public class DialogService : IDialogService
     {
         private readonly MainWindowViewModel _mainWindowViewModel;
+        private readonly IDialogCoordinator _dialogCoordinator;
 
-        private ProgressDialogController _loading;
-
-        public DialogService(MainWindowViewModel mainWindowViewModel)
+        public DialogService(
+            MainWindowViewModel mainWindowViewModel,
+            IDialogCoordinator dialogCoordinator)
         {
             _mainWindowViewModel = mainWindowViewModel;
+            _dialogCoordinator = dialogCoordinator;
         }
 
         public Task ShowLoadingAsync()
@@ -26,6 +28,14 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
         {
             _mainWindowViewModel.IsLoading = false;
             return Task.CompletedTask;
+        }
+
+        public Task ShowErrorAsync(string message)
+        {
+            return _dialogCoordinator.ShowMessageAsync(_mainWindowViewModel, "Error", message, MessageDialogStyle.Affirmative, new MetroDialogSettings
+            {
+                ColorScheme = MetroDialogColorScheme.Inverted,
+            });
         }
     }
 }

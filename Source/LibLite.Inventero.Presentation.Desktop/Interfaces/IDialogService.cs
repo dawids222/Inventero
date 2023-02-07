@@ -6,5 +6,6 @@ namespace LibLite.Inventero.Presentation.Desktop.Interfaces
     {
         Task ShowLoadingAsync();
         Task HideLoadingAsync();
+        Task ShowErrorAsync(string mssage);
     }
 }

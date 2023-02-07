@@ -51,6 +51,8 @@ namespace LibLite.Inventero.Presentation.Desktop
             services.AddSingleton<IViewService, ViewService>();
             services.AddSingleton<IViewModelService>(provider => new ViewModelService(provider));
 
+            services.AddSingleton(DialogCoordinator.Instance);
+
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<MainMenuViewModel>();
 

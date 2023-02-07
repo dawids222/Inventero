@@ -13,8 +13,9 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         public GroupViewModel(
             IGroupStore store,
-            IViewService viewService)
-            : base(store, viewService) { }
+            IViewService viewService,
+            IDialogService dialogService)
+            : base(store, viewService, dialogService) { }
 
         protected override IEnumerable<Input> CreateInputs()
         {

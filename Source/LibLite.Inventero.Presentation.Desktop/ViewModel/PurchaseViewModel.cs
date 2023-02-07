@@ -26,8 +26,9 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         public PurchaseViewModel(
             IPurchaseStore store,
             IViewService viewService,
+            IDialogService dialogService,
             IProductStore relationshipStore)
-            : base(store, viewService, relationshipStore) { }
+            : base(store, viewService, dialogService, relationshipStore) { }
 
         protected override IEnumerable<Input> CreateInputs()
         {
