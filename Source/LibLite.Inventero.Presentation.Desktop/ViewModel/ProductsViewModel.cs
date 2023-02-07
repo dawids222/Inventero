@@ -16,7 +16,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         protected override void AddItem()
         {
-            _viewService.ShowPurchaseView();
+            _viewService.ShowProductView();
         }
 
         protected override void EditItem(Product item)

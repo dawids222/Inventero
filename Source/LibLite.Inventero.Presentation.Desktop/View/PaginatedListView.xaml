@@ -31,7 +31,7 @@
                     HorizontalAlignment="Left">
             <Button Width="64"
                     Height="64"
-                    Style="{DynamicResource MahApps.Styles.Button.Square}"
+                    Style="{DynamicResource MahApps.Styles.Button.Circle}"
                     Command="{Binding AddItemCommand}">
                 <Button.Content>
                     <icons:PackIconFontAwesome Kind="PlusSolid"
