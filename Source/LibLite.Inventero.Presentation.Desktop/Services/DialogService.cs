@@ -33,6 +33,13 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
             return Task.CompletedTask;
         }
 
+        public async Task ShowInfoAsync(string message, Func<Task> onAffirmative)
+        {
+            var result = await _dialogCoordinator.ShowMessageAsync(_mainWindowViewModel, "Info", message, MessageDialogStyle.AffirmativeAndNegative);
+            if (result != MessageDialogResult.Affirmative) { return; }
+            await onAffirmative.Invoke();
+        }
+
         public Task ShowErrorAsync(string message)
         {
             return _dialogCoordinator.ShowMessageAsync(_mainWindowViewModel, "Error", message, MessageDialogStyle.Affirmative, new MetroDialogSettings

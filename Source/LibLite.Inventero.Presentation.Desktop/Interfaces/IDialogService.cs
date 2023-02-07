@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace LibLite.Inventero.Presentation.Desktop.Interfaces
 {
@@ -7,5 +8,6 @@ namespace LibLite.Inventero.Presentation.Desktop.Interfaces
         Task ShowLoadingAsync();
         Task HideLoadingAsync();
         Task ShowErrorAsync(string mssage);
+        Task ShowInfoAsync(string message, Func<Task> onAffirmative);
     }
 }

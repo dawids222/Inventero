@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LibLite.Inventero.Core.Consts;
 using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
@@ -81,9 +82,14 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         protected abstract void EditItem(TItem item);
 
         [RelayCommand]
-        private async void DeleteItem(TItem item)
+        private Task DeleteItem(TItem item)
         {
-            return;
+            var callback = async () =>
+            {
+                await _store.DeleteAsync(item.Id);
+                await LoadItems();
+            };
+            return _dialogService.ShowInfoAsync("Czy na pewno chcesz usunąć?", callback);
         }
 
         [RelayCommand]
@@ -96,8 +102,12 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
                 PageIndex = PageNumber - 1,
                 PageSize = PageSize,
                 Search = Search,
+                Sorts = CreateSortIdDesc(),
             };
         }
+
+        private static IEnumerable<Sort> CreateSortIdDesc() =>
+            new Sort[] { new(nameof(Identifiable.Id), SortDirection.DESC) };
 
         protected DataGridTextColumn CreateDataGridTextColumn(string header, string binding)
         {
