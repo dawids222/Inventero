@@ -15,10 +15,10 @@ namespace LibLite.Inventero.Presentation.Desktop.View
         {
             InitializeComponent();
 
-            DataContextChanged += PaginatedListView_DataContextChanged;
+            Loaded += PaginatedListView_Loaded;
         }
 
-        private void PaginatedListView_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+        private void PaginatedListView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             var columns = (DataContext as dynamic).Columns as IEnumerable<Column>;
             foreach (var column in columns)

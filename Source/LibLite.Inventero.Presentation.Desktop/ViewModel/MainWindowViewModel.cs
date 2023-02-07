@@ -24,7 +24,9 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         private void LoadViews()
         {
             MenuViewModel = _viewModelService.Get<MainMenuViewModel>();
-            MainViewModel = _viewModelService.Get<PurchasesViewModel>();
+            var mainViewModel = _viewModelService.Get<PurchasesViewModel>();
+            MainViewModel = mainViewModel;
+            mainViewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

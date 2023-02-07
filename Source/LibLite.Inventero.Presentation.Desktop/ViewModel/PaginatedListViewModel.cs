@@ -6,6 +6,7 @@ using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -38,13 +39,12 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _store = store;
             _dialogService = dialogService;
             _viewService = viewService;
-            Initialize();
         }
 
+        [RelayCommand]
         private void Initialize()
         {
             CreateDataGrid();
-            LoadItems();
         }
 
         private void CreateDataGrid()
@@ -56,7 +56,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         protected abstract void CreateDataGridColumns(List<Column> columns);
 
         [RelayCommand]
-        private async void LoadItems()
+        private async Task LoadItems()
         {
             await _dialogService.ShowLoadingAsync();
             var request = CreateItemsRequest();

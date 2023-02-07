@@ -1,12 +1,15 @@
 ﻿using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Threading.Tasks;
 
 namespace LibLite.Inventero.Presentation.Desktop.Services
 {
     public class DialogService : IDialogService
     {
+        private readonly TimeSpan LOADING_DELAY = TimeSpan.FromMilliseconds(250);
+
         private readonly MainWindowViewModel _mainWindowViewModel;
         private readonly IDialogCoordinator _dialogCoordinator;
 
@@ -18,10 +21,10 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
             _dialogCoordinator = dialogCoordinator;
         }
 
-        public Task ShowLoadingAsync()
+        public async Task ShowLoadingAsync()
         {
             _mainWindowViewModel.IsLoading = true;
-            return Task.CompletedTask;
+            await Task.Delay(LOADING_DELAY);
         }
 
         public Task HideLoadingAsync()
