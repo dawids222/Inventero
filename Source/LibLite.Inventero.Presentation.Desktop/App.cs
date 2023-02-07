@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace LibLite.Inventero.Presentation.Desktop
@@ -26,6 +27,7 @@ namespace LibLite.Inventero.Presentation.Desktop
             Services = RegisterServices();
             ConfigureServices(Services);
             SetDefaultDateTimeFormat();
+            SetUnhandledExceptionHandling();
 
             InitializeComponent();
         }
@@ -89,6 +91,32 @@ namespace LibLite.Inventero.Presentation.Desktop
         {
             var context = services.GetRequiredService<InventeroDbContext>();
             context.Database.Migrate();
+        }
+
+        private void SetUnhandledExceptionHandling()
+        {
+            AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+                HandleUnhandledException((Exception)e.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException");
+
+            DispatcherUnhandledException += (s, e) =>
+            {
+                HandleUnhandledException(e.Exception, "Application.Current.DispatcherUnhandledException");
+                e.Handled = true;
+            };
+
+            TaskScheduler.UnobservedTaskException += (s, e) =>
+            {
+                HandleUnhandledException(e.Exception, "TaskScheduler.UnobservedTaskException");
+                e.SetObserved();
+            };
+        }
+
+        private void HandleUnhandledException(Exception exception, string source)
+        {
+            var dialogService = Services.GetService<IDialogService>();
+            var message = $"Source: {source}{Environment.NewLine}Message: {exception.Message}";
+            dialogService.ShowErrorAsync(message);
+            // TODO: Add logging
         }
     }
 }
