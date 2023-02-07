@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:t="clr-namespace:LibLite.Inventero.Presentation.Desktop.Models.Triggers"
              xmlns:local="clr-namespace:LibLite.Inventero.Presentation.Desktop.View"
+             xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              x:Name="Root"
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
@@ -25,12 +26,33 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Margin="0 10 0 0">
-                    <Button Content="OK"
-                            Command="{Binding AddItemCommand}"/>
-                    <Separator Width="20" 
+                    <Button x:Name="okBtn"
+                            Width="42"
+                            Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}"
+                            Style="{StaticResource MahApps.Styles.Button.Circle}"
+                            Command="{Binding AddItemCommand}">
+                        <Button.Content>
+                            <icons:PackIconFontAwesome x:Name="okIcon"
+                                                       Kind="CheckSolid"
+                                                       Width="24"
+                                                       Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}"
+                                                       Foreground="{StaticResource LibLite.Brushes.Add}"/>
+                        </Button.Content>
+                    </Button>
+                    <Separator Width="32" 
                             Visibility="Hidden"/>
-                    <Button Content="CANCEL"
-                            Command="{Binding CancelCommand}"/>
+                    <Button Width="{Binding Path=Width, ElementName=okBtn}"
+                            Height="{Binding Path=Width, ElementName=okBtn}"
+                            Style="{StaticResource MahApps.Styles.Button.Circle}"
+                            Command="{Binding CancelCommand}">
+                        <Button.Content>
+                            <icons:PackIconFontAwesome Kind="PlusSolid"
+                                                       Width="{Binding Path=Width, ElementName=okIcon}"
+                                                       Height="{Binding Path=Width, ElementName=okIcon}"
+                                                       Foreground="{StaticResource LibLite.Brushes.Delete}"
+                                                       RotationAngle="45"/>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </Border>
