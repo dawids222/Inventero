@@ -13,7 +13,7 @@ using System.Windows.Data;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
-    public abstract partial class PaginatedListViewModel<TItem, TStore> : ObservableObject
+    public abstract partial class PaginatedListViewModel<TItem, TStore> : ViewModelBase
         where TItem : Identifiable
         where TStore : IStore<TItem>
     {

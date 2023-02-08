@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xaml.Behaviors;
+using System;
 using System.Windows;
-using System.Windows.Interactivity;
 
 namespace LibLite.Inventero.Presentation.Desktop.Models.Triggers
 {

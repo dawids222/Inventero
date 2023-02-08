@@ -1,17 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using System.Threading.Tasks;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
-    public partial class MainWindowViewModel : ObservableObject
+    public partial class MainWindowViewModel : ViewModelBase
     {
         private readonly IViewModelService _viewModelService;
 
         [ObservableProperty]
-        private ObservableObject _menuViewModel;
+        private ViewModelBase _menuViewModel;
         [ObservableProperty]
-        private ObservableObject _mainViewModel;
+        private ViewModelBase _contentViewModel;
         [ObservableProperty]
         private bool _isLoading = false;
 
@@ -20,13 +20,12 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewModelService = viewModelService;
         }
 
-        [RelayCommand]
-        private void LoadViews()
+        protected override async Task LoadAsync()
         {
             MenuViewModel = _viewModelService.Get<MainMenuViewModel>();
-            var mainViewModel = _viewModelService.Get<PurchasesViewModel>();
-            MainViewModel = mainViewModel;
-            mainViewModel.LoadItemsCommand.Execute(null);
+            var contentViewModel = _viewModelService.Get<PurchasesViewModel>();
+            ContentViewModel = contentViewModel;
+            await contentViewModel.LoadItemsCommand.ExecuteAsync(null);
         }
     }
 }

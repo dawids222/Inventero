@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using LibLite.Inventero.Presentation.Desktop.Interfaces;
+﻿using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -14,7 +14,7 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
             _services = services;
         }
 
-        public T Get<T>() where T : ObservableObject
+        public T Get<T>() where T : ViewModelBase
         {
             return _services.GetRequiredService<T>();
         }

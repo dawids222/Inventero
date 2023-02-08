@@ -1,9 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using LibLite.Inventero.Presentation.Desktop.ViewModel;
 
 namespace LibLite.Inventero.Presentation.Desktop.Interfaces
 {
     public interface IViewModelService
     {
-        T Get<T>() where T : ObservableObject; // TODO: Change for dedicated ViewModel base class!!
+        T Get<T>() where T : ViewModelBase;
     }
 }

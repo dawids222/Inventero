@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using LibLite.Inventero.Core.Models.Domain;
+﻿using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
 
@@ -70,10 +69,10 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
         }
 
         private TViewModel ShowView<TViewModel>()
-            where TViewModel : ObservableObject
+            where TViewModel : ViewModelBase
         {
             var viewModel = _viewModelService.Get<TViewModel>();
-            _mainViewModel.MainViewModel = viewModel;
+            _mainViewModel.ContentViewModel = viewModel;
             return viewModel;
         }
     }

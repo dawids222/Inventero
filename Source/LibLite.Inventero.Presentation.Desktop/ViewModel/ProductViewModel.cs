@@ -65,7 +65,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         }
     }
 
-    public abstract partial class ItemViewModel : ObservableObject
+    public abstract partial class ItemViewModel : ViewModelBase
     {
         public IEnumerable<Input> Inputs { get; private set; }
 
@@ -129,7 +129,8 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         public abstract void LoadItem(TItem item);
     }
 
-    public abstract partial class RelationshipItemViewModel<TItem, TStore, TRelationshipItem, TRelationshipStore> : ItemViewModel<TItem, TStore>
+    public abstract partial class RelationshipItemViewModel<TItem, TStore, TRelationshipItem, TRelationshipStore>
+        : ItemViewModel<TItem, TStore>
         where TItem : Identifiable
         where TStore : IStore<TItem>
         where TRelationshipItem : Identifiable

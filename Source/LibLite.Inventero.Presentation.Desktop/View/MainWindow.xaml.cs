@@ -1,4 +1,5 @@
-﻿using LibLite.Inventero.Presentation.Desktop.ViewModel;
+﻿using LibLite.Inventero.Presentation.Desktop.Extensions;
+using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using MahApps.Metro.Controls;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
         public MainWindow()
         {
             InitializeComponent();
+            this.InitializeEvents();
             DataContext = App.Current.Services.GetService<MainWindowViewModel>();
         }
     }
