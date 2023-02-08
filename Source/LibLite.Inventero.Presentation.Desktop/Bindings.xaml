@@ -3,7 +3,7 @@
                     xmlns:vm="clr-namespace:LibLite.Inventero.Presentation.Desktop.ViewModel"
                     xmlns:view="clr-namespace:LibLite.Inventero.Presentation.Desktop.View">
     <DataTemplate DataType="{x:Type vm:MainMenuViewModel}">
-        <view:MainMenu DataContext="{Binding}"/>
+        <view:MainMenuView DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:PurchasesViewModel}">
         <view:PaginatedListView DataContext="{Binding}"/>
