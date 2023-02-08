@@ -42,10 +42,10 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewService = viewService;
         }
 
-        [RelayCommand]
-        private void Initialize()
+        protected override Task LoadAsync()
         {
             CreateDataGrid();
+            return LoadItemsAsync();
         }
 
         private void CreateDataGrid()
@@ -57,7 +57,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         protected abstract void CreateDataGridColumns(List<Column> columns);
 
         [RelayCommand]
-        private async Task LoadItems()
+        private async Task LoadItemsAsync()
         {
             await _dialogService.ShowLoadingAsync();
             var request = CreateItemsRequest();
@@ -87,7 +87,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             var callback = async () =>
             {
                 await _store.DeleteAsync(item.Id);
-                await LoadItems();
+                await LoadItemsAsync();
             };
             return _dialogService.ShowInfoAsync("Czy na pewno chcesz usunąć?", callback);
         }

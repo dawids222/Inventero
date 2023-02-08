@@ -1,4 +1,5 @@
-﻿using LibLite.Inventero.Presentation.Desktop.Models.Views;
+﻿using LibLite.Inventero.Presentation.Desktop.Extensions;
+using LibLite.Inventero.Presentation.Desktop.Models.Views;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
@@ -14,7 +15,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
         public PaginatedListView()
         {
             InitializeComponent();
-
+            this.InitializeEvents();
             Loaded += PaginatedListView_Loaded;
         }
 

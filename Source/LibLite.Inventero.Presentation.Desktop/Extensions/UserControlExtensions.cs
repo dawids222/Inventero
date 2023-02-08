@@ -7,11 +7,15 @@ namespace LibLite.Inventero.Presentation.Desktop.Extensions
     {
         public static void InitializeEvents(this ContentControl view)
         {
-            view.DataContextChanged += delegate
+            view.Loaded += delegate
             {
                 var vm = (ViewModelBase)view.DataContext;
-                view.Loaded += delegate { vm.OnLoaded(); };
-                view.Unloaded += delegate { vm.OnUnloaded(); };
+                vm.OnLoaded();
+            };
+            view.Unloaded += delegate
+            {
+                var vm = (ViewModelBase)view.DataContext;
+                vm.OnUnloaded();
             };
         }
     }

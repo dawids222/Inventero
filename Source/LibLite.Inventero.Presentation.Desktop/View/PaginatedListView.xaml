@@ -10,11 +10,6 @@
              x:Name="Root"
              d:DesignHeight="450" 
              d:DesignWidth="800">
-    <i:Interaction.Triggers>
-        <i:EventTrigger  EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding InitializeCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"/>
@@ -46,7 +41,7 @@
             <TextBox Width="180"
                      Text="{Binding Search, UpdateSourceTrigger=PropertyChanged }">
                 <TextBox.InputBindings>
-                    <KeyBinding Command="{Binding LoadItemsCommand}" Key="Enter"/>
+                    <KeyBinding Command="{Binding LoadItemsAsyncCommand}" Key="Enter"/>
                 </TextBox.InputBindings>
             </TextBox>
             <Button Width="32"

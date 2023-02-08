@@ -19,8 +19,7 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
 
         public void ShowGroups()
         {
-            var viewModel = ShowView<GroupsViewModel>();
-            viewModel.LoadItemsCommand.Execute(null);
+            ShowView<GroupsViewModel>();
         }
 
         public void ShowGroup()
@@ -36,8 +35,7 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
 
         public void ShowProducts()
         {
-            var viewModel = ShowView<ProductsViewModel>();
-            viewModel.LoadItemsCommand.Execute(null);
+            ShowView<ProductsViewModel>();
         }
 
         public void ShowProduct()
@@ -53,8 +51,7 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
 
         public void ShowPurchases()
         {
-            var viewModel = ShowView<PurchasesViewModel>();
-            viewModel.LoadItemsCommand.Execute(null);
+            ShowView<PurchasesViewModel>();
         }
 
         public void ShowPurchase()
