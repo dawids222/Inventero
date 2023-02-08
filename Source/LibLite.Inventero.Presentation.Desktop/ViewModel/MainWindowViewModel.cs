@@ -20,12 +20,11 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewModelService = viewModelService;
         }
 
-        protected override async Task LoadAsync()
+        protected override Task LoadAsync()
         {
             MenuViewModel = _viewModelService.Get<MainMenuViewModel>();
-            var contentViewModel = _viewModelService.Get<PurchasesViewModel>();
-            ContentViewModel = contentViewModel;
-            await contentViewModel.LoadItemsCommand.ExecuteAsync(null);
+            ContentViewModel = _viewModelService.Get<PurchasesViewModel>();
+            return Task.CompletedTask;
         }
     }
 }

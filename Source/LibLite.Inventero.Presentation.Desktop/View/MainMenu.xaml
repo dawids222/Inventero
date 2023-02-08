@@ -5,18 +5,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rs="clr-namespace:LibLite.Inventero.Presentation.Desktop.Resources"
-             xmlns:vm="clr-namespace:LibLite.Inventero.Presentation.Desktop.ViewModel"
+             xmlns:vm="clr-namespace:LibLite.Inventero.Presentation.Desktop.ViewModel" 
+             xmlns:c="clr-namespace:LibLite.Inventero.Presentation.Desktop.Converters"
              mc:Ignorable="d" 
              x:Name="root"
              d:DesignHeight="450" 
              d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=vm:MainMenuViewModel}">
+    <UserControl.Resources>
+        <c:NegationConverter x:Key="NegationConverter"/>
+    </UserControl.Resources>
     <Border CornerRadius="0,0,0,0"
             Background="{StaticResource LibLite.Brushes.Gradient.Linear.Vertical.Primary}">
         <StackPanel>
             <Separator Height="40" Background="Transparent"/>
             <RadioButton Style="{StaticResource MenuButton}"
                          IsChecked="True"
+                         IsEnabled="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource NegationConverter}}"
                          Tag="{StaticResource LibLite.Brushes.Purchase.Primary}"
                          Command="{Binding ShowPurchasesViewCommand}">
                 <StackPanel Orientation="Horizontal">
@@ -29,6 +34,7 @@
                 </StackPanel>
             </RadioButton>
             <RadioButton Style="{StaticResource MenuButton}"
+                         IsEnabled="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource NegationConverter}}"
                          Tag="{StaticResource LibLite.Brushes.Product.Primary}"
                          Command="{Binding ShowProductsViewCommand}">
                 <StackPanel Orientation="Horizontal">
@@ -40,6 +46,7 @@
                 </StackPanel>
             </RadioButton>
             <RadioButton Style="{StaticResource MenuButton}"
+                         IsEnabled="{Binding Path=IsChecked, RelativeSource={RelativeSource Self}, Converter={StaticResource NegationConverter}}"
                          Tag="{StaticResource LibLite.Brushes.Group.Primary}"
                          Command="{Binding ShowGroupsViewCommand}">
                 <StackPanel Orientation="Horizontal">
