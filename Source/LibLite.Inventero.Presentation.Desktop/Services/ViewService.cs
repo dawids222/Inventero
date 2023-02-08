@@ -17,52 +17,52 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
             _viewModelService = viewModelService;
         }
 
-        public void ShowGroupsView()
+        public void ShowGroups()
         {
             var viewModel = ShowView<GroupsViewModel>();
             viewModel.LoadItemsCommand.Execute(null);
         }
 
-        public void ShowGroupView()
+        public void ShowGroup()
         {
             ShowView<GroupViewModel>();
         }
 
-        public void ShowGroupView(Group group)
+        public void ShowGroup(Group group)
         {
             var viewModel = ShowView<GroupViewModel>();
             viewModel.LoadItem(group);
         }
 
-        public void ShowProductsView()
+        public void ShowProducts()
         {
             var viewModel = ShowView<ProductsViewModel>();
             viewModel.LoadItemsCommand.Execute(null);
         }
 
-        public void ShowProductView()
+        public void ShowProduct()
         {
             ShowView<ProductViewModel>();
         }
 
-        public void ShowProductView(Product product)
+        public void ShowProduct(Product product)
         {
             var viewModel = ShowView<ProductViewModel>();
             viewModel.LoadItem(product);
         }
 
-        public void ShowPurchasesView()
+        public void ShowPurchases()
         {
             var viewModel = ShowView<PurchasesViewModel>();
             viewModel.LoadItemsCommand.Execute(null);
         }
 
-        public void ShowPurchaseView()
+        public void ShowPurchase()
         {
             ShowView<PurchaseViewModel>();
         }
 
-        public void ShowPurchaseView(Purchase purchase)
+        public void ShowPurchase(Purchase purchase)
         {
             var viewModel = ShowView<PurchaseViewModel>();
             viewModel.LoadItem(purchase);

@@ -13,11 +13,11 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         }
 
         [RelayCommand]
-        private void ShowPurchasesView() => _viewService.ShowPurchasesView();
+        private void ShowPurchasesView() => _viewService.ShowPurchases();
         [RelayCommand]
-        private void ShowProductsView() => _viewService.ShowProductsView();
+        private void ShowProductsView() => _viewService.ShowProducts();
         [RelayCommand]
-        private void ShowGroupsView() => _viewService.ShowGroupsView();
+        private void ShowGroupsView() => _viewService.ShowGroups();
         [RelayCommand]
         private void ShowInventoryView() { }
     }

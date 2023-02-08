@@ -92,7 +92,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         protected override void GoBack()
         {
-            _viewService.ShowPurchasesView();
+            _viewService.ShowPurchases();
         }
     }
 }

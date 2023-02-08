@@ -16,12 +16,12 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         protected override void AddItem()
         {
-            _viewService.ShowGroupView();
+            _viewService.ShowGroup();
         }
 
         protected override void EditItem(Group item)
         {
-            _viewService.ShowGroupView(item);
+            _viewService.ShowGroup(item);
         }
 
         protected override void CreateDataGridColumns(List<Column> columns)

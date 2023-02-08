@@ -4,16 +4,16 @@ namespace LibLite.Inventero.Presentation.Desktop.Interfaces
 {
     public interface IViewService
     {
-        void ShowPurchasesView();
-        void ShowProductsView();
-        void ShowGroupsView();
+        void ShowPurchases();
+        void ShowProducts();
+        void ShowGroups();
 
-        void ShowPurchaseView();
-        void ShowProductView();
-        void ShowGroupView();
+        void ShowPurchase();
+        void ShowProduct();
+        void ShowGroup();
 
-        void ShowPurchaseView(Purchase purchase);
-        void ShowProductView(Product product);
-        void ShowGroupView(Group group);
+        void ShowPurchase(Purchase purchase);
+        void ShowProduct(Product product);
+        void ShowGroup(Group group);
     }
 }
