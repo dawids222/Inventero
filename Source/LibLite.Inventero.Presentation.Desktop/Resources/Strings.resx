@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorMessageTitle" xml:space="preserve">
+    <value>Error!</value>
+  </data>
   <data name="GroupsMenuLabel" xml:space="preserve">
     <value>Groups</value>
   </data>
   <data name="GroupsNameHeader" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="InfoMessageTitle" xml:space="preserve">
+    <value>Info</value>
   </data>
   <data name="InventoryMenuLabel" xml:space="preserve">
     <value>Inventory</value>

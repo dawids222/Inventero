@@ -61,6 +61,15 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error!.
+        /// </summary>
+        public static string ErrorMessageTitle {
+            get {
+                return ResourceManager.GetString("ErrorMessageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Groups.
         /// </summary>
         public static string GroupsMenuLabel {
@@ -75,6 +84,15 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         public static string GroupsNameHeader {
             get {
                 return ResourceManager.GetString("GroupsNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        public static string InfoMessageTitle {
+            get {
+                return ResourceManager.GetString("InfoMessageTitle", resourceCulture);
             }
         }
         

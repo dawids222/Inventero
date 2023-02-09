@@ -1,4 +1,5 @@
 ﻿using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using LibLite.Inventero.Presentation.Desktop.Resources;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using MahApps.Metro.Controls.Dialogs;
 using System;
@@ -35,17 +36,26 @@ namespace LibLite.Inventero.Presentation.Desktop.Services
 
         public async Task ShowInfoAsync(string message, Func<Task> onAffirmative)
         {
-            var result = await _dialogCoordinator.ShowMessageAsync(_mainWindowViewModel, "Info", message, MessageDialogStyle.AffirmativeAndNegative);
+            var result = await _dialogCoordinator.ShowMessageAsync(
+                context: _mainWindowViewModel,
+                title: Strings.InfoMessageTitle,
+                message: message,
+                style: MessageDialogStyle.AffirmativeAndNegative);
             if (result != MessageDialogResult.Affirmative) { return; }
             await onAffirmative.Invoke();
         }
 
         public Task ShowErrorAsync(string message)
         {
-            return _dialogCoordinator.ShowMessageAsync(_mainWindowViewModel, "Error", message, MessageDialogStyle.Affirmative, new MetroDialogSettings
-            {
-                ColorScheme = MetroDialogColorScheme.Inverted,
-            });
+            return _dialogCoordinator.ShowMessageAsync(
+                context: _mainWindowViewModel,
+                title: Strings.ErrorMessageTitle,
+                message: message,
+                style: MessageDialogStyle.Affirmative,
+                settings: new MetroDialogSettings
+                {
+                    ColorScheme = MetroDialogColorScheme.Inverted,
+                });
         }
     }
 }
