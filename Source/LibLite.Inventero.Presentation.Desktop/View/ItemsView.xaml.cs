@@ -1,6 +1,6 @@
 ﻿using LibLite.Inventero.Presentation.Desktop.Extensions;
 using LibLite.Inventero.Presentation.Desktop.Models.Views;
-using System.Collections.Generic;
+using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,14 +21,18 @@ namespace LibLite.Inventero.Presentation.Desktop.View
 
         private void PaginatedListView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            var columns = (DataContext as dynamic).Columns as IEnumerable<Column>;
+            GenerateColumns();
+            MoveActionsToTheEnd();
+        }
+
+        private void GenerateColumns()
+        {
+            var viewModel = (ItemsViewModel)DataContext;
+            var columns = viewModel.Columns;
             foreach (var column in columns)
             {
                 ItemsDataGrid.Columns.Add(CreateTextColumn(column));
             }
-            var firstColumn = ItemsDataGrid.Columns.First();
-            ItemsDataGrid.Columns.Remove(firstColumn);
-            ItemsDataGrid.Columns.Add(firstColumn);
         }
 
         private static DataGridTextColumn CreateTextColumn(Column column)
@@ -53,6 +57,13 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                 binding.StringFormat = column.StringFormat;
             }
             return binding;
+        }
+
+        private void MoveActionsToTheEnd()
+        {
+            var actionsColumn = ItemsDataGrid.Columns.First();
+            ItemsDataGrid.Columns.Remove(actionsColumn);
+            ItemsDataGrid.Columns.Add(actionsColumn);
         }
     }
 }
