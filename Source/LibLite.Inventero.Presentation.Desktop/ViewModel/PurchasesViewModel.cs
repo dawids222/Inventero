@@ -2,11 +2,12 @@
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views;
+using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
-    public partial class PurchasesViewModel : PaginatedListViewModel<Purchase, IPurchaseStore>
+    public partial class PurchasesViewModel : ItemsViewModel<Purchase, IPurchaseStore>
     {
         public PurchasesViewModel(
             IPurchaseStore store,
@@ -24,12 +25,15 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewService.ShowPurchase(item);
         }
 
-        protected override void CreateDataGridColumns(List<Column> columns)
+        protected override List<Column> CreateColumns()
         {
-            columns.Add(new Column("Produkt", $"{nameof(Purchase.Product)}.{nameof(Purchase.Product.Name)}"));
-            columns.Add(new Column("Liczba", nameof(Purchase.Amount)));
-            columns.Add(new Column("Cena Jednostkowa", nameof(Purchase.UnitPrice)));
-            columns.Add(new Column("Data Zakupu", nameof(Purchase.Date), "d"));
+            return new List<Column>
+            {
+                new Column(Strings.PurchasesProductNameHeader, $"{nameof(Purchase.Product)}.{nameof(Purchase.Product.Name)}"),
+                new Column(Strings.PurchasesAmountHeader, nameof(Purchase.Amount)),
+                new Column(Strings.PurchasesUnitPriceHeader, nameof(Purchase.UnitPrice)),
+                new Column(Strings.PurchasesDateHeader, nameof(Purchase.Date), "d"),
+            };
         }
     }
 }

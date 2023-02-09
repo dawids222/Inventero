@@ -2,11 +2,12 @@
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views;
+using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
-    public partial class GroupsViewModel : PaginatedListViewModel<Group, IGroupStore>
+    public partial class GroupsViewModel : ItemsViewModel<Group, IGroupStore>
     {
         public GroupsViewModel(
             IGroupStore store,
@@ -24,9 +25,12 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewService.ShowGroup(item);
         }
 
-        protected override void CreateDataGridColumns(List<Column> columns)
+        protected override List<Column> CreateColumns()
         {
-            columns.Add(new Column("Nazwa", nameof(Group.Name)));
+            return new List<Column>()
+            {
+                new Column(Strings.GroupsNameHeader, nameof(Group.Name)),
+            };
         }
     }
 }

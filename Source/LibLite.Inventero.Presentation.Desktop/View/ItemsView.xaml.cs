@@ -10,9 +10,9 @@ namespace LibLite.Inventero.Presentation.Desktop.View
     /// <summary>
     /// Interaction logic for PaginatedListView.xaml
     /// </summary>
-    public partial class PaginatedListView : UserControl
+    public partial class ItemsView : UserControl
     {
-        public PaginatedListView()
+        public ItemsView()
         {
             InitializeComponent();
             this.InitializeEvents();

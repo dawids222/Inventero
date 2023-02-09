@@ -117,43 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GroupsGridNameHeader" xml:space="preserve">
-    <value>Name</value>
-  </data>
   <data name="GroupsMenuLabel" xml:space="preserve">
     <value>Groups</value>
+  </data>
+  <data name="GroupsNameHeader" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="InventoryMenuLabel" xml:space="preserve">
     <value>Inventory</value>
   </data>
-  <data name="ProductsGridGroupNameHeader" xml:space="preserve">
+  <data name="ItemsActionsHeader" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="ItemsDeleteMessageContent" xml:space="preserve">
+    <value>Are you sure you want to delete?</value>
+  </data>
+  <data name="ItemsSearchLabel" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ProductsGroupNameHeader" xml:space="preserve">
     <value>Group</value>
-  </data>
-  <data name="ProductsGridNameHeader" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="ProductsGridPriceHeader" xml:space="preserve">
-    <value>Price</value>
   </data>
   <data name="ProductsManuLabel" xml:space="preserve">
     <value>Products</value>
   </data>
-  <data name="PurchasesGridAmountHeader" xml:space="preserve">
+  <data name="ProductsNameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ProductsPriceHeader" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="PurchasesAmountHeader" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="PurchasesGridDateHeader" xml:space="preserve">
+  <data name="PurchasesDateHeader" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="PurchasesGridGroupNameHeader" xml:space="preserve">
+  <data name="PurchasesGroupNameHeader" xml:space="preserve">
     <value>Group</value>
-  </data>
-  <data name="PurchasesGridProductNameHeader" xml:space="preserve">
-    <value>Product</value>
-  </data>
-  <data name="PurchasesGridUnitPriceHeader" xml:space="preserve">
-    <value>Unit price</value>
   </data>
   <data name="PurchasesMenuLabel" xml:space="preserve">
     <value>Purchases</value>
+  </data>
+  <data name="PurchasesProductNameHeader" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="PurchasesUnitPriceHeader" xml:space="preserve">
+    <value>Unit price</value>
   </data>
 </root>

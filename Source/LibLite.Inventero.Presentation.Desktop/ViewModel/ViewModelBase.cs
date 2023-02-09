@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Threading.Tasks;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
@@ -8,8 +7,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
     {
         [ObservableProperty]
         private bool _isLoaded = false;
-
-        public Strings Strings { get; } = new();
 
         protected virtual Task LoadAsync() { return Task.CompletedTask; }
         protected virtual Task UnloadAsync() { return Task.CompletedTask; }

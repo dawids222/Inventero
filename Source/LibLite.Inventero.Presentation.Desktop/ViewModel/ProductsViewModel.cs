@@ -2,11 +2,12 @@
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views;
+using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
-    public partial class ProductsViewModel : PaginatedListViewModel<Product, IProductStore>
+    public partial class ProductsViewModel : ItemsViewModel<Product, IProductStore>
     {
         public ProductsViewModel(
             IProductStore store,
@@ -24,12 +25,14 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             _viewService.ShowProduct(item);
         }
 
-        protected override void CreateDataGridColumns(List<Column> columns)
+        protected override List<Column> CreateColumns()
         {
-            // TODO: Use string resources
-            columns.Add(new Column("Kategoria", $"{nameof(Product.Group)}.{nameof(Product.Group.Name)}"));
-            columns.Add(new Column("Nazwa", nameof(Product.Name)));
-            columns.Add(new Column("Cena", nameof(Product.Price)));
+            return new List<Column>
+            {
+                new Column(Strings.ProductsGroupNameHeader, $"{nameof(Product.Group)}.{nameof(Product.Group.Name)}"),
+                new Column(Strings.ProductsNameHeader, nameof(Product.Name)),
+                new Column(Strings.ProductsPriceHeader, nameof(Product.Price)),
+            };
         }
     }
 }

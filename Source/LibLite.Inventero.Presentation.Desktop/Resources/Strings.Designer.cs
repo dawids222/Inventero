@@ -61,20 +61,20 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string GroupsGridNameHeader {
-            get {
-                return ResourceManager.GetString("GroupsGridNameHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Groups.
         /// </summary>
         public static string GroupsMenuLabel {
             get {
                 return ResourceManager.GetString("GroupsMenuLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string GroupsNameHeader {
+            get {
+                return ResourceManager.GetString("GroupsNameHeader", resourceCulture);
             }
         }
         
@@ -88,29 +88,38 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string ItemsActionsHeader {
+            get {
+                return ResourceManager.GetString("ItemsActionsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete?.
+        /// </summary>
+        public static string ItemsDeleteMessageContent {
+            get {
+                return ResourceManager.GetString("ItemsDeleteMessageContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string ItemsSearchLabel {
+            get {
+                return ResourceManager.GetString("ItemsSearchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group.
         /// </summary>
-        public static string ProductsGridGroupNameHeader {
+        public static string ProductsGroupNameHeader {
             get {
-                return ResourceManager.GetString("ProductsGridGroupNameHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string ProductsGridNameHeader {
-            get {
-                return ResourceManager.GetString("ProductsGridNameHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Price.
-        /// </summary>
-        public static string ProductsGridPriceHeader {
-            get {
-                return ResourceManager.GetString("ProductsGridPriceHeader", resourceCulture);
+                return ResourceManager.GetString("ProductsGroupNameHeader", resourceCulture);
             }
         }
         
@@ -124,47 +133,47 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ProductsNameHeader {
+            get {
+                return ResourceManager.GetString("ProductsNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string ProductsPriceHeader {
+            get {
+                return ResourceManager.GetString("ProductsPriceHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
-        public static string PurchasesGridAmountHeader {
+        public static string PurchasesAmountHeader {
             get {
-                return ResourceManager.GetString("PurchasesGridAmountHeader", resourceCulture);
+                return ResourceManager.GetString("PurchasesAmountHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
-        public static string PurchasesGridDateHeader {
+        public static string PurchasesDateHeader {
             get {
-                return ResourceManager.GetString("PurchasesGridDateHeader", resourceCulture);
+                return ResourceManager.GetString("PurchasesDateHeader", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Group.
         /// </summary>
-        public static string PurchasesGridGroupNameHeader {
+        public static string PurchasesGroupNameHeader {
             get {
-                return ResourceManager.GetString("PurchasesGridGroupNameHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Product.
-        /// </summary>
-        public static string PurchasesGridProductNameHeader {
-            get {
-                return ResourceManager.GetString("PurchasesGridProductNameHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unit price.
-        /// </summary>
-        public static string PurchasesGridUnitPriceHeader {
-            get {
-                return ResourceManager.GetString("PurchasesGridUnitPriceHeader", resourceCulture);
+                return ResourceManager.GetString("PurchasesGroupNameHeader", resourceCulture);
             }
         }
         
@@ -174,6 +183,24 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         public static string PurchasesMenuLabel {
             get {
                 return ResourceManager.GetString("PurchasesMenuLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product.
+        /// </summary>
+        public static string PurchasesProductNameHeader {
+            get {
+                return ResourceManager.GetString("PurchasesProductNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit price.
+        /// </summary>
+        public static string PurchasesUnitPriceHeader {
+            get {
+                return ResourceManager.GetString("PurchasesUnitPriceHeader", resourceCulture);
             }
         }
     }
