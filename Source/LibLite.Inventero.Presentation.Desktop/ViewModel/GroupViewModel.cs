@@ -2,6 +2,7 @@
 using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
 using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel

@@ -3,6 +3,7 @@ using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
 using System;
 using System.Collections.Generic;
 
@@ -34,7 +35,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         {
             return new Input[]
             {
-                new DropDownInput(
+                new SelectInput(
                     "Produkt",
                     nameof(Product),
                     nameof(ProductSearch),
@@ -45,7 +46,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
                     SelectedCommand),
                 new DoubleInput("Cena jednostkowa", nameof(UnitPrice)),
                 new StringInput("Liczba", nameof(Amount)),
-                new DatePickerInput("Data", nameof(Date)),
+                new DateInput("Data", nameof(Date)),
             };
         }
 

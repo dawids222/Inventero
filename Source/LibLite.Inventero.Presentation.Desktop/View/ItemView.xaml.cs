@@ -1,4 +1,5 @@
-﻿using LibLite.Inventero.Presentation.Desktop.ViewModel;
+﻿using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
+using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -67,7 +68,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                     panel.Children.Add(textBox);
                     Content.Children.Add(panel);
                 }
-                if (input is DatePickerInput)
+                if (input is DateInput)
                 {
                     var label = new Label()
                     {
@@ -88,7 +89,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
                     panel.Children.Add(datePicker);
                     Content.Children.Add(panel);
                 }
-                if (input is DropDownInput i)
+                if (input is SelectInput i)
                 {
                     var label = new Label()
                     {
@@ -160,7 +161,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBox = (ComboBox)sender;
-            var input = (DropDownInput)comboBox.Tag;
+            var input = (SelectInput)comboBox.Tag;
             input.SelectionChangedCommand.Execute(null);
         }
 
@@ -176,7 +177,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
         {
             var textBox = (TextBoxBase)sender;
             var comboBox = (ComboBox)textBox.Tag;
-            var input = (DropDownInput)comboBox.Tag;
+            var input = (SelectInput)comboBox.Tag;
             input.SearchCommand.Execute(null);
         }
     }

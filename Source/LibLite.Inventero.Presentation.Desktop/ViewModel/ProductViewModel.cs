@@ -4,67 +4,12 @@ using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
+using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 {
-    public abstract class Input
-    {
-        public string Label { get; set; }
-        public string Binding { get; set; }
-
-        protected Input(string label, string binding)
-        {
-            Label = label;
-            Binding = binding;
-        }
-    }
-
-    public class StringInput : Input
-    {
-        public StringInput(string label, string binding) : base(label, binding) { }
-    }
-
-    public class DoubleInput : Input
-    {
-        public DoubleInput(string label, string binding) : base(label, binding) { }
-    }
-
-    public class DatePickerInput : Input
-    {
-        public DatePickerInput(string label, string binding) : base(label, binding) { }
-    }
-
-    public class DropDownInput : Input
-    {
-        public string SearchBinding { get; set; }
-        public string SelectedItemBinding { get; set; }
-        public string ItemsBinding { get; set; }
-        public string DisplayMember { get; set; }
-        public ICommand SearchCommand { get; set; }
-        public ICommand SelectionChangedCommand { get; set; }
-
-        public DropDownInput(
-            string label,
-            string binding,
-            string searchBinding,
-            string selectedItemBinding,
-            string itemsBinding,
-            string displayMember,
-            ICommand searchCommand,
-            ICommand selectionChangedCommand) : base(label, binding)
-        {
-            SearchBinding = searchBinding;
-            SelectedItemBinding = selectedItemBinding;
-            ItemsBinding = itemsBinding;
-            DisplayMember = displayMember;
-            SearchCommand = searchCommand;
-            SelectionChangedCommand = selectionChangedCommand;
-        }
-    }
-
     public abstract partial class ItemViewModel : ViewModelBase
     {
         public IEnumerable<Input> Inputs { get; private set; }
@@ -202,7 +147,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             {
                 new StringInput("Nazwa", nameof(Name)),
                 new DoubleInput("Cena", nameof(Price)),
-                new DropDownInput(
+                new SelectInput(
                     "Kategoria",
                     nameof(Group),
                     nameof(GroupSearch),
