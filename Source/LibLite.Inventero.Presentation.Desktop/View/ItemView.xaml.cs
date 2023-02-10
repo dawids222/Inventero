@@ -1,8 +1,10 @@
 ﻿using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
+using LibLite.Inventero.Presentation.Desktop.View.Controls;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
+using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace LibLite.Inventero.Presentation.Desktop.View
@@ -19,166 +21,165 @@ namespace LibLite.Inventero.Presentation.Desktop.View
             InitializeComponent();
         }
 
+        // IDEA: How about moving this logic to event bus handler?
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            var viewModel = DataContext as ItemViewModel;
-            var inputs = viewModel.Inputs;
-
-            foreach (var input in inputs)
-            {
-                if (input is StringInput)
-                {
-                    var label = new Label()
-                    {
-                        Width = INPUT_WIDTH,
-                        Content = input.Label,
-                    };
-                    var textBox = new TextBox()
-                    {
-                        Width = INPUT_WIDTH,
-                    };
-                    var binding = new Binding(input.Binding)
-                    {
-                        Source = viewModel,
-                    };
-                    textBox.SetBinding(TextBox.TextProperty, binding);
-                    var panel = CreateInputStackPanel();
-                    panel.Children.Add(label);
-                    panel.Children.Add(textBox);
-                    Content.Children.Add(panel);
-                }
-                if (input is DoubleInput)
-                {
-                    var label = new Label()
-                    {
-                        Width = INPUT_WIDTH,
-                        Content = input.Label,
-                    };
-                    var textBox = new TextBox()
-                    {
-                        Width = INPUT_WIDTH,
-                    };
-                    var binding = new Binding(input.Binding)
-                    {
-                        Source = viewModel,
-                    };
-                    textBox.SetBinding(TextBox.TextProperty, binding);
-                    var panel = CreateInputStackPanel();
-                    panel.Children.Add(label);
-                    panel.Children.Add(textBox);
-                    Content.Children.Add(panel);
-                }
-                if (input is DateInput)
-                {
-                    var label = new Label()
-                    {
-                        Width = INPUT_WIDTH,
-                        Content = input.Label,
-                    };
-                    var datePicker = new DatePicker()
-                    {
-                        Width = INPUT_WIDTH,
-                    };
-                    var binding = new Binding(input.Binding)
-                    {
-                        Source = viewModel,
-                    };
-                    datePicker.SetBinding(DatePicker.TextProperty, binding);
-                    var panel = CreateInputStackPanel();
-                    panel.Children.Add(label);
-                    panel.Children.Add(datePicker);
-                    Content.Children.Add(panel);
-                }
-                if (input is SelectInput i)
-                {
-                    var label = new Label()
-                    {
-                        Width = INPUT_WIDTH,
-                        Content = input.Label,
-                    };
-                    var comboBox = new ComboBox()
-                    {
-                        Width = INPUT_WIDTH,
-                        IsEditable = true,
-                        StaysOpenOnEdit = true,
-                        IsTextSearchEnabled = false,
-                        DisplayMemberPath = i.DisplayMember,
-                        Tag = i,
-                    };
-                    var itemsSourceBinding = new Binding(i.ItemsBinding)
-                    {
-                        Source = viewModel,
-                    };
-                    var textBinding = new Binding(i.SearchBinding)
-                    {
-                        Source = viewModel,
-                    };
-                    var selectedItemBinding = new Binding(i.SelectedItemBinding)
-                    {
-                        Source = viewModel,
-                        UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-                    };
-                    comboBox.SetBinding(ItemsControl.ItemsSourceProperty, itemsSourceBinding);
-                    comboBox.SetBinding(ComboBox.TextProperty, textBinding);
-                    comboBox.SetBinding(Selector.SelectedItemProperty, selectedItemBinding);
-                    comboBox.IsKeyboardFocusWithinChanged += ComboBox_IsKeyboardFocusWithinChanged;
-                    comboBox.SelectionChanged += ComboBox_SelectionChanged;
-                    comboBox.Loaded += ComboBox_Loaded;
-                    var binding = new Binding(input.Binding)
-                    {
-                        Source = viewModel,
-                    };
-                    comboBox.SetBinding(TextBox.TextProperty, binding);
-                    var panel = CreateInputStackPanel();
-                    panel.Children.Add(label);
-                    panel.Children.Add(comboBox);
-                    Content.Children.Add(panel);
-                }
-            }
-            var buttons = Content.Children[0];
-            Content.Children.RemoveAt(0);
-            Content.Children.Add(buttons);
+            CreateInputs();
+            MoveButtonsToTheEnd();
         }
 
-        private static StackPanel CreateInputStackPanel()
+        private void CreateInputs()
         {
-            return new StackPanel
+            var viewModel = (ItemViewModel)DataContext;
+            var inputs = viewModel.Inputs;
+            foreach (var input in inputs)
+            {
+                var control = CreateInput(input, viewModel);
+                Content.Children.Add(control);
+            }
+        }
+
+        private UIElement CreateInput(Input input, ItemViewModel viewModel)
+        {
+            return input switch
+            {
+                StringInput stringInput => CreateStringInput(stringInput, viewModel),
+                NumberInput doubleInput => CreateNumberInput(doubleInput, viewModel),
+                DateInput dateInput => CreateDateInput(dateInput, viewModel),
+                SelectInput selectInput => CreateSelectInput(selectInput, viewModel),
+                _ => throw new NotImplementedException(),
+            };
+        }
+
+        private static StackPanel CreateStringInput(StringInput input, ItemViewModel viewModel)
+        {
+            var label = CreateInputLabel(input);
+            var textBox = CreateInputTextBox(input, viewModel);
+            return CreateInputStackPanel(label, textBox);
+        }
+
+        private StackPanel CreateNumberInput(NumberInput input, ItemViewModel viewModel)
+        {
+            var label = CreateInputLabel(input);
+            var textBox = CreateInputTextBox(input, viewModel);
+            textBox.TextChanged += NumberTextBox_TextChanged;
+            return CreateInputStackPanel(label, textBox);
+        }
+
+        private static StackPanel CreateDateInput(DateInput input, ItemViewModel viewModel)
+        {
+            var label = CreateInputLabel(input);
+            var datePicker = CreateInputDatePicker(input, viewModel);
+            return CreateInputStackPanel(label, datePicker);
+        }
+
+        private static StackPanel CreateSelectInput(SelectInput input, ItemViewModel viewModel)
+        {
+            var label = CreateInputLabel(input);
+            var select = new Select()
+            {
+                Width = INPUT_WIDTH,
+                DisplayMemberPath = input.DisplayMember,
+                Tag = input,
+            };
+            var itemsSourceBinding = new Binding(input.ItemsBinding)
+            {
+                Source = viewModel,
+            };
+            var searchTextBinding = new Binding(input.SearchBinding)
+            {
+                Source = viewModel,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            };
+            var searchCommandBinding = new Binding(input.SearchCommand)
+            {
+                Source = viewModel,
+            };
+
+            var selectedItemBinding = CreateInputPrimaryBinding(input, viewModel);
+            select.SetBinding(Select.ItemsSourceProperty, itemsSourceBinding);
+            select.SetBinding(Select.SearchTextProperty, searchTextBinding);
+            select.SetBinding(Select.SelectedItemProperty, selectedItemBinding);
+            select.SetBinding(Select.SearchCommandProperty, searchCommandBinding);
+
+            return CreateInputStackPanel(label, select);
+        }
+
+        private static Label CreateInputLabel(Input input)
+        {
+            return new Label()
+            {
+                Width = INPUT_WIDTH,
+                Content = input.Label,
+            };
+        }
+
+        private static TextBox CreateInputTextBox(Input input, ItemViewModel viewModel)
+        {
+            var textBox = new TextBox()
+            {
+                Width = INPUT_WIDTH,
+            };
+            var binding = CreateInputPrimaryBinding(input, viewModel);
+            textBox.SetBinding(TextBox.TextProperty, binding);
+            return textBox;
+        }
+
+        private static DatePicker CreateInputDatePicker(Input input, ItemViewModel viewModel)
+        {
+            var datePicker = new DatePicker()
+            {
+                Width = INPUT_WIDTH,
+            };
+            var binding = CreateInputPrimaryBinding(input, viewModel);
+            datePicker.SetBinding(DatePicker.TextProperty, binding);
+            return datePicker;
+        }
+
+        private static Binding CreateInputPrimaryBinding(Input input, ItemViewModel viewModel)
+        {
+            return new Binding(input.Binding)
+            {
+                Source = viewModel,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.LostFocus,
+            };
+        }
+
+        private static StackPanel CreateInputStackPanel(params UIElement[] controls)
+        {
+            var panel = new StackPanel
             {
                 Orientation = Orientation.Vertical,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(0, 0, 0, 10),
             };
+            foreach (var control in controls)
+            {
+                panel.Children.Add(control);
+            }
+            return panel;
         }
 
-        private void ComboBox_IsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void MoveButtonsToTheEnd()
         {
-            var isKeyboardFocusWithin = (bool)e.NewValue;
-            if (!isKeyboardFocusWithin) { return; }
-            var comboBox = sender as ComboBox;
-            comboBox.IsDropDownOpen = true;
+            var buttons = Content.Children[0];
+            Content.Children.RemoveAt(0);
+            Content.Children.Add(buttons);
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void NumberTextBox_TextChanged(object sender, EventArgs e)
         {
-            var comboBox = (ComboBox)sender;
-            var input = (SelectInput)comboBox.Tag;
-            input.SelectionChangedCommand.Execute(null);
-        }
-
-        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            var comboBox = (ComboBox)sender;
-            var textBox = (TextBox)comboBox.Template.FindName("PART_EditableTextBox", comboBox);
-            textBox.Tag = comboBox;
-            textBox.TextChanged += TextBox_TextChanged;
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var textBox = (TextBoxBase)sender;
-            var comboBox = (ComboBox)textBox.Tag;
-            var input = (SelectInput)comboBox.Tag;
-            input.SearchCommand.Execute(null);
+            var textBox = (TextBox)sender;
+            var builder = new StringBuilder();
+            char[] validChars = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',' };
+            foreach (char c in textBox.Text)
+            {
+                if (Array.IndexOf(validChars, c) == -1) { continue; }
+                builder.Append(c);
+            }
+            textBox.Text = builder.ToString();
         }
     }
 }

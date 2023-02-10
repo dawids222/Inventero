@@ -2,8 +2,8 @@
 {
     public abstract class Input
     {
-        public string Label { get; set; }
-        public string Binding { get; set; }
+        public string Label { get; }
+        public string Binding { get; }
 
         protected Input(string label, string binding)
         {

@@ -39,12 +39,10 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
                     "Produkt",
                     nameof(Product),
                     nameof(ProductSearch),
-                    nameof(Product),
                     nameof(Products),
                     nameof(Core.Models.Domain.Product.Name),
-                    SearchCommand,
-                    SelectedCommand),
-                new DoubleInput("Cena jednostkowa", nameof(UnitPrice)),
+                    nameof(SearchCommand)),
+                new NumberInput("Cena jednostkowa", nameof(UnitPrice)),
                 new StringInput("Liczba", nameof(Amount)),
                 new DateInput("Data", nameof(Date)),
             };
@@ -87,7 +85,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             Amount = item.Amount;
             UnitPrice = item.UnitPrice;
             Date = item.Date;
-            Products = new PaginatedList<Product>(new Product[] { item.Product }, 0, 1, 1);
             Product = item.Product;
         }
 

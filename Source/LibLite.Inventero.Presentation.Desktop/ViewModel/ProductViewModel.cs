@@ -105,11 +105,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         [RelayCommand]
         protected async void Search()
         {
-            if (_selected)
-            {
-                _selected = false;
-                return;
-            }
             SearchRelationship();
         }
 
@@ -146,16 +141,14 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             return new Input[]
             {
                 new StringInput("Nazwa", nameof(Name)),
-                new DoubleInput("Cena", nameof(Price)),
+                new NumberInput("Cena", nameof(Price)),
                 new SelectInput(
                     "Kategoria",
                     nameof(Group),
                     nameof(GroupSearch),
-                    nameof(Group),
                     nameof(Groups),
                     nameof(Core.Models.Domain.Group.Name),
-                    SearchCommand,
-                    SelectedCommand),
+                    nameof(SearchCommand)),
             };
         }
 
@@ -189,7 +182,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             Id = item.Id;
             Name = item.Name;
             Price = item.Price;
-            Groups = new PaginatedList<Group>(new Group[] { item.Group }, 0, 1, 1);
             Group = item.Group;
         }
 
