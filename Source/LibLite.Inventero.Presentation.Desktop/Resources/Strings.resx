@@ -144,6 +144,9 @@
   <data name="ItemsSearchLabel" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="ItemValidationErrorMessageContent" xml:space="preserve">
+    <value>Provided data is incorrect</value>
+  </data>
   <data name="ProductGroupLabel" xml:space="preserve">
     <value>Group</value>
   </data>

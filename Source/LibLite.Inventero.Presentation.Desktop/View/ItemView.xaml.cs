@@ -1,4 +1,5 @@
-﻿using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
+﻿using LibLite.Inventero.Presentation.Desktop.Extensions;
+using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
 using LibLite.Inventero.Presentation.Desktop.View.Controls;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using System;
@@ -19,6 +20,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
         public ItemView()
         {
             InitializeComponent();
+            this.InitializeEvents();
         }
 
         // IDEA: How about moving this logic to event bus handler?

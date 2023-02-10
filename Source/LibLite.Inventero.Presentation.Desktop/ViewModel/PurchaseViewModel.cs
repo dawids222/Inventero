@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
-using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
 using LibLite.Inventero.Presentation.Desktop.Resources;
@@ -14,11 +13,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
     public partial class PurchaseViewModel : RelationshipItemViewModel<Purchase, IPurchaseStore, Product, IProductStore>
     {
         [ObservableProperty]
-        private string _productSearch = string.Empty;
-        [ObservableProperty]
         private Product _product;
-        [ObservableProperty]
-        private PaginatedList<Product> _products;
         [ObservableProperty]
         private double _unitPrice;
         [ObservableProperty]
@@ -40,10 +35,10 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
                 new SelectInput(
                     Strings.PurchaseProductLabel,
                     nameof(Product),
-                    nameof(ProductSearch),
-                    nameof(Products),
+                    nameof(Search),
+                    nameof(Relationships),
                     nameof(Core.Models.Domain.Product.Name),
-                    nameof(SearchCommand),
+                    nameof(SearchRelationshipsCommand),
                     nameof(UpdateUnitPriceCommand)),
                 new NumberInput(Strings.PurchaseUnitPriceLabel, nameof(UnitPrice)),
                 new NumberInput(Strings.PurchaseAmountLabel, nameof(Amount)),
@@ -62,16 +57,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
                 item.Product is not null &&
                 item.UnitPrice >= 0 &&
                 item.Amount > 0;
-        }
-
-        protected override async void SearchRelationship()
-        {
-            var request = new PaginatedListRequest()
-            {
-                PageSize = 10,
-                Search = ProductSearch,
-            };
-            Products = await _relationshipStore.GetAsync(request);
         }
 
         public override void LoadItem(Purchase item)

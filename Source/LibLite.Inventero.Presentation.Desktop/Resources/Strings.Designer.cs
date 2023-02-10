@@ -142,6 +142,15 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provided data is incorrect.
+        /// </summary>
+        public static string ItemValidationErrorMessageContent {
+            get {
+                return ResourceManager.GetString("ItemValidationErrorMessageContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group.
         /// </summary>
         public static string ProductGroupLabel {

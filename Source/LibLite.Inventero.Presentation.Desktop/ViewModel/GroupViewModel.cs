@@ -27,8 +27,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             };
         }
 
-        protected override void Load() { }
-
         protected override Group CreateItem()
         {
             return new Group(Id, Name);
