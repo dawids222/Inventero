@@ -1,6 +1,7 @@
 ﻿using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
+using LibLite.Inventero.Presentation.Desktop.ViewModel.Item;
 
 namespace LibLite.Inventero.Presentation.Desktop.Services
 {

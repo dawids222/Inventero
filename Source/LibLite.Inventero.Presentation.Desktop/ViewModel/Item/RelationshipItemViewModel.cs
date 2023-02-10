@@ -6,7 +6,7 @@ using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using System.Threading.Tasks;
 
-namespace LibLite.Inventero.Presentation.Desktop.ViewModel
+namespace LibLite.Inventero.Presentation.Desktop.ViewModel.Item
 {
     public abstract partial class RelationshipItemViewModel<TItem, TStore, TRelationshipItem, TRelationshipStore>
         : ItemViewModel<TItem, TStore>

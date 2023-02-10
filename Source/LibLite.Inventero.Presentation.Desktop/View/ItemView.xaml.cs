@@ -1,7 +1,7 @@
 ﻿using LibLite.Inventero.Presentation.Desktop.Extensions;
 using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
 using LibLite.Inventero.Presentation.Desktop.View.Controls;
-using LibLite.Inventero.Presentation.Desktop.ViewModel;
+using LibLite.Inventero.Presentation.Desktop.ViewModel.Item;
 using System;
 using System.Text;
 using System.Windows;

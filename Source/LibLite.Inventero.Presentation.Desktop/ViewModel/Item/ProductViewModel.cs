@@ -6,7 +6,7 @@ using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
 using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Collections.Generic;
 
-namespace LibLite.Inventero.Presentation.Desktop.ViewModel
+namespace LibLite.Inventero.Presentation.Desktop.ViewModel.Item
 {
     public partial class ProductViewModel : RelationshipItemViewModel<Product, IProductStore, Group, IGroupStore>
     {

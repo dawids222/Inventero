@@ -8,7 +8,7 @@ using LibLite.Inventero.Presentation.Desktop.Resources;
 using System;
 using System.Collections.Generic;
 
-namespace LibLite.Inventero.Presentation.Desktop.ViewModel
+namespace LibLite.Inventero.Presentation.Desktop.ViewModel.Item
 {
     public partial class PurchaseViewModel : RelationshipItemViewModel<Purchase, IPurchaseStore, Product, IProductStore>
     {

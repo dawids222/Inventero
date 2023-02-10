@@ -14,13 +14,13 @@
     <DataTemplate DataType="{x:Type vm:GroupsViewModel}">
         <view:ItemsView DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:PurchaseViewModel}">
+    <DataTemplate DataType="{x:Type vm:Item.PurchaseViewModel}">
         <view:ItemView DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:ProductViewModel}">
+    <DataTemplate DataType="{x:Type vm:Item.ProductViewModel}">
         <view:ItemView DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:GroupViewModel}">
+    <DataTemplate DataType="{x:Type vm:Item.GroupViewModel}">
         <view:ItemView DataContext="{Binding}"/>
     </DataTemplate>
 </ResourceDictionary>
