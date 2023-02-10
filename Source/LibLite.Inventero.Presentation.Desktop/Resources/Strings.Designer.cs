@@ -70,6 +70,15 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string GroupNameLabel {
+            get {
+                return ResourceManager.GetString("GroupNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Groups.
         /// </summary>
         public static string GroupsMenuLabel {
@@ -135,6 +144,33 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Group.
         /// </summary>
+        public static string ProductGroupLabel {
+            get {
+                return ResourceManager.GetString("ProductGroupLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ProductNameLabel {
+            get {
+                return ResourceManager.GetString("ProductNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string ProductPriceLabel {
+            get {
+                return ResourceManager.GetString("ProductPriceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group.
+        /// </summary>
         public static string ProductsGroupNameHeader {
             get {
                 return ResourceManager.GetString("ProductsGroupNameHeader", resourceCulture);
@@ -165,6 +201,33 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         public static string ProductsPriceHeader {
             get {
                 return ResourceManager.GetString("ProductsPriceHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string PurchaseAmountLabel {
+            get {
+                return ResourceManager.GetString("PurchaseAmountLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string PurchaseDateLabel {
+            get {
+                return ResourceManager.GetString("PurchaseDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product.
+        /// </summary>
+        public static string PurchaseProductLabel {
+            get {
+                return ResourceManager.GetString("PurchaseProductLabel", resourceCulture);
             }
         }
         
@@ -219,6 +282,15 @@ namespace LibLite.Inventero.Presentation.Desktop.Resources {
         public static string PurchasesUnitPriceHeader {
             get {
                 return ResourceManager.GetString("PurchasesUnitPriceHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit price.
+        /// </summary>
+        public static string PurchaseUnitPriceLabel {
+            get {
+                return ResourceManager.GetString("PurchaseUnitPriceLabel", resourceCulture);
             }
         }
     }

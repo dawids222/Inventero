@@ -120,6 +120,9 @@
   <data name="ErrorMessageTitle" xml:space="preserve">
     <value>Error!</value>
   </data>
+  <data name="GroupNameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="GroupsMenuLabel" xml:space="preserve">
     <value>Groups</value>
   </data>
@@ -141,6 +144,15 @@
   <data name="ItemsSearchLabel" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="ProductGroupLabel" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="ProductNameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ProductPriceLabel" xml:space="preserve">
+    <value>Price</value>
+  </data>
   <data name="ProductsGroupNameHeader" xml:space="preserve">
     <value>Group</value>
   </data>
@@ -152,6 +164,15 @@
   </data>
   <data name="ProductsPriceHeader" xml:space="preserve">
     <value>Price</value>
+  </data>
+  <data name="PurchaseAmountLabel" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="PurchaseDateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="PurchaseProductLabel" xml:space="preserve">
+    <value>Product</value>
   </data>
   <data name="PurchasesAmountHeader" xml:space="preserve">
     <value>Amount</value>
@@ -169,6 +190,9 @@
     <value>Product</value>
   </data>
   <data name="PurchasesUnitPriceHeader" xml:space="preserve">
+    <value>Unit price</value>
+  </data>
+  <data name="PurchaseUnitPriceLabel" xml:space="preserve">
     <value>Unit price</value>
   </data>
 </root>

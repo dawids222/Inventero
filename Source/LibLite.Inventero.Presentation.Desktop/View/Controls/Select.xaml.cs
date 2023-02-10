@@ -51,6 +51,12 @@ namespace LibLite.Inventero.Presentation.Desktop.View.Controls
             set { SetValue(SearchCommandProperty, value); }
         }
 
+        public ICommand ItemSelectedCommand
+        {
+            get { return (ICommand)GetValue(ItemSelectedCommandProperty); }
+            set { SetValue(ItemSelectedCommandProperty, value); }
+        }
+
         public static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register("SelectedItem", typeof(object),
                 typeof(Select), new PropertyMetadata(null));
@@ -74,6 +80,9 @@ namespace LibLite.Inventero.Presentation.Desktop.View.Controls
         public static readonly DependencyProperty SearchCommandProperty =
             DependencyProperty.Register("SearchCommand", typeof(ICommand),
                 typeof(Select), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty ItemSelectedCommandProperty =
+            DependencyProperty.Register("ItemSelectedCommand", typeof(ICommand), typeof(Select), new PropertyMetadata(null));
 
         public Select()
         {
@@ -112,6 +121,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View.Controls
             var item = (ListViewItem)sender;
             if (!item.IsSelected) { return; }
             SelectedItem = item.Content;
+            ItemSelectedCommand?.Execute(null);
             itemsListView.Visibility = Visibility.Collapsed;
         }
 

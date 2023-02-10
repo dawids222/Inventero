@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
+using LibLite.Inventero.Presentation.Desktop.Resources;
 using System;
 using System.Collections.Generic;
 
@@ -36,15 +38,16 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             return new Input[]
             {
                 new SelectInput(
-                    "Produkt",
+                    Strings.PurchaseProductLabel,
                     nameof(Product),
                     nameof(ProductSearch),
                     nameof(Products),
                     nameof(Core.Models.Domain.Product.Name),
-                    nameof(SearchCommand)),
-                new NumberInput("Cena jednostkowa", nameof(UnitPrice)),
-                new StringInput("Liczba", nameof(Amount)),
-                new DateInput("Data", nameof(Date)),
+                    nameof(SearchCommand),
+                    nameof(UpdateUnitPriceCommand)),
+                new NumberInput(Strings.PurchaseUnitPriceLabel, nameof(UnitPrice)),
+                new NumberInput(Strings.PurchaseAmountLabel, nameof(Amount)),
+                new DateInput(Strings.PurchaseDateLabel, nameof(Date)),
             };
         }
 
@@ -71,16 +74,8 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
             Products = await _relationshipStore.GetAsync(request);
         }
 
-        protected override void Selected()
-        {
-            base.Selected();
-            UnitPrice = Product?.Price ?? default;
-        }
-
         public override void LoadItem(Purchase item)
         {
-            _selected = true;
-
             Id = item.Id;
             Amount = item.Amount;
             UnitPrice = item.UnitPrice;
@@ -91,6 +86,12 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         protected override void GoBack()
         {
             _viewService.ShowPurchases();
+        }
+
+        [RelayCommand]
+        private void UpdateUnitPrice()
+        {
+            UnitPrice = Product?.Price ?? default;
         }
     }
 }

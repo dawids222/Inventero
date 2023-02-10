@@ -6,6 +6,7 @@
         public string ItemsBinding { get; }
         public string DisplayMember { get; }
         public string SearchCommand { get; }
+        public string ItemSelectedCommad { get; set; }
 
         public SelectInput(
             string label,
@@ -13,12 +14,15 @@
             string searchBinding,
             string itemsBinding,
             string displayMember,
-            string searchCommand) : base(label, binding)
+            string searchCommand,
+            string itemSelectedCommad = "")
+            : base(label, binding)
         {
             SearchBinding = searchBinding;
             ItemsBinding = itemsBinding;
             DisplayMember = displayMember;
             SearchCommand = searchCommand;
+            ItemSelectedCommad = itemSelectedCommad;
         }
     }
 }

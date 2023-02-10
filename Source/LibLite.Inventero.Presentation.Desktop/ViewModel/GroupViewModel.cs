@@ -3,6 +3,7 @@ using LibLite.Inventero.Core.Contracts.Stores;
 using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
+using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Collections.Generic;
 
 namespace LibLite.Inventero.Presentation.Desktop.ViewModel
@@ -22,7 +23,7 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         {
             return new Input[]
             {
-                new StringInput("Nazwa", nameof(Group.Name)),
+                new StringInput(Strings.GroupNameLabel, nameof(Group.Name)),
             };
         }
 

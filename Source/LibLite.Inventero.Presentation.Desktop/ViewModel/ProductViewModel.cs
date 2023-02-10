@@ -5,6 +5,7 @@ using LibLite.Inventero.Core.Models.Domain;
 using LibLite.Inventero.Core.Models.Pagination;
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Models.Views.Inputs;
+using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -83,8 +84,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
     {
         protected readonly TRelationshipStore _relationshipStore;
 
-        protected bool _selected = false;
-
         protected RelationshipItemViewModel(
             TStore store,
             IViewService viewService,
@@ -111,8 +110,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         [RelayCommand]
         protected virtual async void Selected()
         {
-            _selected = true;
-            return;
         }
     }
 
@@ -140,10 +137,10 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         {
             return new Input[]
             {
-                new StringInput("Nazwa", nameof(Name)),
-                new NumberInput("Cena", nameof(Price)),
+                new StringInput(Strings.ProductNameLabel, nameof(Name)),
+                new NumberInput(Strings.ProductPriceLabel, nameof(Price)),
                 new SelectInput(
-                    "Kategoria",
+                    Strings.ProductGroupLabel,
                     nameof(Group),
                     nameof(GroupSearch),
                     nameof(Groups),
@@ -177,8 +174,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
 
         public override void LoadItem(Product item)
         {
-            _selected = true;
-
             Id = item.Id;
             Name = item.Name;
             Price = item.Price;

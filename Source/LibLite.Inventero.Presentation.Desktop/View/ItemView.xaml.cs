@@ -80,29 +80,12 @@ namespace LibLite.Inventero.Presentation.Desktop.View
             {
                 Width = INPUT_WIDTH,
                 DisplayMemberPath = input.DisplayMember,
-                Tag = input,
             };
-            var itemsSourceBinding = new Binding(input.ItemsBinding)
-            {
-                Source = viewModel,
-            };
-            var searchTextBinding = new Binding(input.SearchBinding)
-            {
-                Source = viewModel,
-                Mode = BindingMode.TwoWay,
-                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
-            };
-            var searchCommandBinding = new Binding(input.SearchCommand)
-            {
-                Source = viewModel,
-            };
-
-            var selectedItemBinding = CreateInputPrimaryBinding(input, viewModel);
-            select.SetBinding(Select.ItemsSourceProperty, itemsSourceBinding);
-            select.SetBinding(Select.SearchTextProperty, searchTextBinding);
-            select.SetBinding(Select.SelectedItemProperty, selectedItemBinding);
-            select.SetBinding(Select.SearchCommandProperty, searchCommandBinding);
-
+            select.SetBinding(Select.ItemsSourceProperty, CreateDefaultBinding(input.ItemsBinding, viewModel));
+            select.SetBinding(Select.SearchTextProperty, CreatePropertyChangedBinding(input.SearchBinding, viewModel));
+            select.SetBinding(Select.SelectedItemProperty, CreatePropertyChangedBinding(input.Binding, viewModel));
+            select.SetBinding(Select.SearchCommandProperty, CreateDefaultBinding(input.SearchCommand, viewModel));
+            select.SetBinding(Select.ItemSelectedCommandProperty, CreateDefaultBinding(input.ItemSelectedCommad, viewModel));
             return CreateInputStackPanel(label, select);
         }
 
@@ -121,7 +104,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
             {
                 Width = INPUT_WIDTH,
             };
-            var binding = CreateInputPrimaryBinding(input, viewModel);
+            var binding = CreateLostFocusBinding(input.Binding, viewModel);
             textBox.SetBinding(TextBox.TextProperty, binding);
             return textBox;
         }
@@ -132,14 +115,29 @@ namespace LibLite.Inventero.Presentation.Desktop.View
             {
                 Width = INPUT_WIDTH,
             };
-            var binding = CreateInputPrimaryBinding(input, viewModel);
+            var binding = CreatePropertyChangedBinding(input.Binding, viewModel);
             datePicker.SetBinding(DatePicker.TextProperty, binding);
             return datePicker;
         }
 
-        private static Binding CreateInputPrimaryBinding(Input input, ItemViewModel viewModel)
+        private static Binding CreateDefaultBinding(string binding, ItemViewModel viewModel)
         {
-            return new Binding(input.Binding)
+            return new Binding(binding) { Source = viewModel };
+        }
+
+        private static Binding CreatePropertyChangedBinding(string binding, ItemViewModel viewModel)
+        {
+            return new Binding(binding)
+            {
+                Source = viewModel,
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+            };
+        }
+
+        private static Binding CreateLostFocusBinding(string binding, ItemViewModel viewModel)
+        {
+            return new Binding(binding)
             {
                 Source = viewModel,
                 Mode = BindingMode.TwoWay,
