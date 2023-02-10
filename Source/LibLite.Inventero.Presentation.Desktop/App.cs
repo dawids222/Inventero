@@ -7,6 +7,7 @@ using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.Services;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using LibLite.Inventero.Presentation.Desktop.ViewModel.Item;
+using LibLite.Inventero.Presentation.Desktop.ViewModel.Items;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

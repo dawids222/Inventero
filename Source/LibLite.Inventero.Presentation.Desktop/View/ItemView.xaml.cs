@@ -37,7 +37,7 @@ namespace LibLite.Inventero.Presentation.Desktop.View
             foreach (var input in inputs)
             {
                 var control = CreateInput(input, viewModel);
-                Content.Children.Add(control);
+                form.Children.Add(control);
             }
         }
 
@@ -164,9 +164,9 @@ namespace LibLite.Inventero.Presentation.Desktop.View
 
         private void MoveButtonsToTheEnd()
         {
-            var buttons = Content.Children[0];
-            Content.Children.RemoveAt(0);
-            Content.Children.Add(buttons);
+            var buttons = form.Children[0];
+            form.Children.RemoveAt(0);
+            form.Children.Add(buttons);
         }
 
         private void NumberTextBox_TextChanged(object sender, EventArgs e)

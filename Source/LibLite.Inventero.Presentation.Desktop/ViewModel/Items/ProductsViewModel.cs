@@ -5,7 +5,7 @@ using LibLite.Inventero.Presentation.Desktop.Models.Views;
 using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Collections.Generic;
 
-namespace LibLite.Inventero.Presentation.Desktop.ViewModel
+namespace LibLite.Inventero.Presentation.Desktop.ViewModel.Items
 {
     public partial class ProductsViewModel : ItemsViewModel<Product, IProductStore>
     {

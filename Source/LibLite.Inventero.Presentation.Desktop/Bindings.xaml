@@ -5,13 +5,13 @@
     <DataTemplate DataType="{x:Type vm:MainMenuViewModel}">
         <view:MainMenuView DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:PurchasesViewModel}">
+    <DataTemplate DataType="{x:Type vm:Items.PurchasesViewModel}">
         <view:ItemsView DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:ProductsViewModel}">
+    <DataTemplate DataType="{x:Type vm:Items.ProductsViewModel}">
         <view:ItemsView DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:GroupsViewModel}">
+    <DataTemplate DataType="{x:Type vm:Items.GroupsViewModel}">
         <view:ItemsView DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:Item.PurchaseViewModel}">

@@ -2,7 +2,7 @@
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using System.Threading.Tasks;
 
-namespace LibLite.Inventero.Presentation.Desktop.ViewModel
+namespace LibLite.Inventero.Presentation.Desktop.ViewModel.Items
 {
     public partial class MainWindowViewModel : ViewModelBase
     {

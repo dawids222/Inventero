@@ -1,6 +1,6 @@
 ﻿using LibLite.Inventero.Presentation.Desktop.Extensions;
 using LibLite.Inventero.Presentation.Desktop.Models.Views;
-using LibLite.Inventero.Presentation.Desktop.ViewModel;
+using LibLite.Inventero.Presentation.Desktop.ViewModel.Items;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Data;

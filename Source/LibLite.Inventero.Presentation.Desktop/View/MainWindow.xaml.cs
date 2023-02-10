@@ -1,5 +1,5 @@
 ﻿using LibLite.Inventero.Presentation.Desktop.Extensions;
-using LibLite.Inventero.Presentation.Desktop.ViewModel;
+using LibLite.Inventero.Presentation.Desktop.ViewModel.Items;
 using MahApps.Metro.Controls;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -10,7 +10,7 @@ using LibLite.Inventero.Presentation.Desktop.Resources;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LibLite.Inventero.Presentation.Desktop.ViewModel
+namespace LibLite.Inventero.Presentation.Desktop.ViewModel.Items
 {
     public abstract partial class ItemsViewModel : ViewModelBase
     {

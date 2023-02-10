@@ -10,7 +10,7 @@
              x:Name="Root"
              d:DesignHeight="450" 
              d:DesignWidth="800" 
-             d:DataContext="{d:DesignInstance Type=vm:ProductViewModel}"
+             d:DataContext="{d:DesignInstance Type=vm:Item.ProductViewModel}"
              Loaded="UserControl_Loaded">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -22,7 +22,7 @@
         <Border BorderThickness="1"
                 CornerRadius="45"
                 BorderBrush="{StaticResource MahApps.Brushes.Border.NonActive}">
-            <StackPanel x:Name="Content" 
+            <StackPanel x:Name="form" 
                         Orientation="Vertical"
                         Margin="36">
                 <StackPanel Orientation="Horizontal"

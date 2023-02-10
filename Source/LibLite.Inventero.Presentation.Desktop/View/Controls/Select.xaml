@@ -29,7 +29,6 @@
                     BorderThickness="{Binding Path=BorderThickness,ElementName=searchTextBox}"
                     BorderBrush="{Binding Path=BorderBrush,ElementName=searchTextBox}">
                 <Button.Content>
-                    <!-- TODO: Add transition to close icon -->
                     <icons:PackIconFontAwesome x:Name="openIcon"
                                                Width="18"
                                                Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}">

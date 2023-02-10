@@ -2,6 +2,7 @@
 using LibLite.Inventero.Presentation.Desktop.Interfaces;
 using LibLite.Inventero.Presentation.Desktop.ViewModel;
 using LibLite.Inventero.Presentation.Desktop.ViewModel.Item;
+using LibLite.Inventero.Presentation.Desktop.ViewModel.Items;
 
 namespace LibLite.Inventero.Presentation.Desktop.Services
 {
