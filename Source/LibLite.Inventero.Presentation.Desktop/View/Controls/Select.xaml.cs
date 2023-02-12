@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -105,10 +107,10 @@ namespace LibLite.Inventero.Presentation.Desktop.View.Controls
             itemsListView.Visibility = Visibility.Visible;
         }
 
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private async void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             SearchText = searchTextBox.Text;
-            SearchCommand.Execute(null);
+            await ExecuteAsync(SearchCommand);
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -116,12 +118,12 @@ namespace LibLite.Inventero.Presentation.Desktop.View.Controls
             itemsListView.Visibility = SwitchVisibility(itemsListView.Visibility);
         }
 
-        private void ItemsListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private async void ItemsListView_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var item = (ListViewItem)sender;
             if (!item.IsSelected) { return; }
             SelectedItem = item.Content;
-            ItemSelectedCommand?.Execute(null);
+            await ExecuteAsync(ItemSelectedCommand);
             itemsListView.Visibility = Visibility.Collapsed;
         }
 
@@ -142,6 +144,16 @@ namespace LibLite.Inventero.Presentation.Desktop.View.Controls
                 Visibility.Collapsed => Visibility.Visible,
                 Visibility.Hidden => Visibility.Visible,
                 _ => throw new NotImplementedException(),
+            };
+        }
+
+        private static Task ExecuteAsync(ICommand command, object parameter = null)
+        {
+            if (command is null) { return Task.CompletedTask; }
+            return command switch
+            {
+                IAsyncRelayCommand asyncCommand => asyncCommand.ExecuteAsync(parameter),
+                _ => Task.Run(() => command.Execute(parameter)),
             };
         }
     }

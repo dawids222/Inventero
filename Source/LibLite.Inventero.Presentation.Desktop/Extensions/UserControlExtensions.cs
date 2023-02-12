@@ -1,4 +1,5 @@
 ﻿using LibLite.Inventero.Presentation.Desktop.ViewModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LibLite.Inventero.Presentation.Desktop.Extensions
@@ -7,15 +8,15 @@ namespace LibLite.Inventero.Presentation.Desktop.Extensions
     {
         public static void InitializeEvents(this ContentControl view)
         {
-            view.Loaded += delegate
+            view.Loaded += async (object sender, RoutedEventArgs e) =>
             {
                 var vm = (ViewModelBase)view.DataContext;
-                vm.OnLoaded();
+                await vm.OnLoadedAsync();
             };
-            view.Unloaded += delegate
+            view.Unloaded += async (object sender, RoutedEventArgs e) =>
             {
                 var vm = (ViewModelBase)view.DataContext;
-                vm.OnUnloaded();
+                await vm.OnUnloadedAsync();
             };
         }
     }

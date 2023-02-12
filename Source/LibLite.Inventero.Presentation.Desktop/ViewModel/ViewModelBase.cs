@@ -11,14 +11,14 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel
         protected virtual Task LoadAsync() { return Task.CompletedTask; }
         protected virtual Task UnloadAsync() { return Task.CompletedTask; }
 
-        public async void OnLoaded()
+        public async Task OnLoadedAsync()
         {
             if (IsLoaded) { return; }
             await LoadAsync();
             IsLoaded = true;
         }
 
-        public async void OnUnloaded()
+        public async Task OnUnloadedAsync()
         {
             if (!IsLoaded) { return; }
             await UnloadAsync();

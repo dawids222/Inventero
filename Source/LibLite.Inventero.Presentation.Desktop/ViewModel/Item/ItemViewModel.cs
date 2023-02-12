@@ -52,7 +52,6 @@ namespace LibLite.Inventero.Presentation.Desktop.ViewModel.Item
             var item = CreateItem();
             if (!ValidateItem(item))
             {
-                // TODO: Provide more reasonable messages.
                 var error = Strings.ItemValidationErrorMessageContent;
                 await _dialogService.ShowErrorAsync(error);
                 return;
